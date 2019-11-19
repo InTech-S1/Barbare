@@ -1,8 +1,4 @@
-//=========================================================================
-// Site WEB demo PI
-// Auteurs : P. Thiré & T. Kerbrat
-// Version : 09/11/2018
-//=========================================================================
+//
 
 "use strict";
 
@@ -10,10 +6,13 @@ const http = require("http");
 const url = require("url");
 let mon_serveur;
 let port;
+let bfld = [];
+let e1 = [" "," "," "," "," "," "," "," "];
+let e2 = [" ","x"," "," "," "," "," "," "];
+let e3 = [" "," "," "," "," "," "," "," "];
+let e4 = [" "," "," "," "," "," "," "," "];
+bfld.push(e1, e2, e3, e4);
 
-//-------------------------------------------------------------------------
-// DECLARATION DES DIFFERENTS MODULES CORRESPONDANT A CHAQUE ACTION
-//-------------------------------------------------------------------------
 
 const req_accueil = require("./req_accueil.js");
 const req_commencer = require("./req_commencer.js");
@@ -21,26 +20,29 @@ const req_afficher_formulaire_inscription = require("./req_afficher_formulaire_i
 const req_inscrire = require("./req_inscrire.js");
 const req_identifier = require("./req_identifier.js");
 const req_debuter = require("./req_debuter.js");
+const req_jeu_histoire = require("./req_jeu_histoire.js");
+const req_jeu_survie = require("./req_jeu_survie.js");
+
+const move = require("./move.js");
 
 const req_static = require("./req_statique.js");
 const req_erreur = require("./req_erreur.js");
 
-//-------------------------------------------------------------------------
-// FONCTION DE CALLBACK APPELLEE POUR CHAQUE REQUETE
-//-------------------------------------------------------------------------
+let uuidV4 = require('uuid/v4');
+
 
 const traite_requete = function (req, res) {
 
 	let requete;
 	let pathname;
 	let query;
+	let sid;
 
 	console.log("URL reçue : " + req.url);
 	requete = url.parse(req.url, true);
 	pathname = requete.pathname;
 	query = requete.query;
 
-	// ROUTEUR
 
 	try {
 		switch (pathname) {
@@ -58,10 +60,19 @@ const traite_requete = function (req, res) {
 				req_inscrire(req, res, query);
 				break;
 			case '/req_identifier':
-				req_identifier(req, res, query);
+				req_identifier(req, res, query, uuidV4);
 				break;
 			case '/req_debuter':
 				req_debuter(req, res, query);
+				break;
+			case '/req_jeu_histoire':
+				req_jeu_histoire(req, res, query, bfld);
+				break;
+			case '/move':
+				move(req, res, query, bfld);
+				break;
+			case '/req_jeu_survie':
+				req_jeu_survie(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);
@@ -75,12 +86,8 @@ const traite_requete = function (req, res) {
 	}
 };
 
-//-------------------------------------------------------------------------
-// CREATION ET LANCEMENT DU SERVEUR
-//-------------------------------------------------------------------------
 
 mon_serveur = http.createServer(traite_requete);
 port = 5000;
-//port = process.argv[2];
 console.log("Serveur en ecoute sur port " + port);
 mon_serveur.listen(port);
