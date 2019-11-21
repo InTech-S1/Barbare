@@ -12,14 +12,19 @@ const req_debuter = function (req, res, query) {
 
 	let marqueurs;
 	let page;
+	let sid;
 
 	// AFFICHAGE DE LA PAGE D'ACCUEIL
 
 	page = fs.readFileSync('modele_debuter.html', 'utf-8');
 
+	sid = query.sid;
+	fs.writeFileSync("ids/" + sid);
+
 	marqueurs = {};
 	marqueurs.erreur = "";
 	marqueurs.pseudo = "";
+	marqueurs.sid = sid;
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, { 'Content-Type': 'text/html' });

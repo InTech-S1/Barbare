@@ -9,8 +9,9 @@
 		<p>
 			Bonjour <em>{pseudo}<em>
 		</p>
-
-		<form action="/req_debuter" method="GET">
+		
+     	<input type="hidden" name="sid" value="{sid}">
+		<form action="/req_debuter?sid={sid}" method="GET">
             <button name="action" value="creer">Cliquer ici pour passer au jeu</button>
         </form>
 
