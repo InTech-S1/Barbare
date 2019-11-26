@@ -11,7 +11,6 @@ const setup = function(req, res, query, bfld){
 
 	page = fs.readFileSync('map.html', 'utf-8');
 	
-	console.log(bfld);
     marqueurs = {};
     marqueurs.erreur = "";
 
@@ -22,10 +21,11 @@ const setup = function(req, res, query, bfld){
 				marqueurs[x] = "";
 			}else if(bfld[i][j] === "x"){
 				marqueurs[x] = "X";
+			}else if(bfld[i][j] === "o"){
+				marqueurs[x] = "O";
 			}
 		}
 	}
-	marqueurs.aa = "";
 
     page = page.supplant(marqueurs);
 

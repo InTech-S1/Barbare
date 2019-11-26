@@ -12,6 +12,9 @@ let e2 = [" ","x"," "," "," "," "," "," "];
 let e3 = [" "," "," "," "," "," "," "," "];
 let e4 = [" "," "," "," "," "," "," "," "];
 bfld.push(e1, e2, e3, e4);
+let wave = [0];
+let heros = [];
+let oppo = [];
 
 
 const req_accueil = require("./req_accueil.js");
@@ -66,10 +69,10 @@ const traite_requete = function (req, res) {
 				req_debuter(req, res, query);
 				break;
 			case '/req_jeu_histoire':
-				req_jeu_histoire(req, res, query, bfld);
+				req_jeu_histoire(req, res, query, bfld, heros);
 				break;
 			case '/move':
-				move(req, res, query, bfld);
+				move(req, res, query, bfld, wave, oppo, heros);
 				break;
 			case '/req_jeu_survie':
 				req_jeu_survie(req, res, query);
