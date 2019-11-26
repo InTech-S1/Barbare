@@ -1,4 +1,4 @@
-//
+//index
 
 "use strict";
 
@@ -25,7 +25,7 @@ const req_identifier = require("./req_identifier.js");
 const req_debuter = require("./req_debuter.js");
 const req_jeu_histoire = require("./req_jeu_histoire.js");
 const req_jeu_survie = require("./req_jeu_survie.js");
-
+const req_fin_survie = require("./req_fin_survie.js");
 const move = require("./move.js");
 
 const req_static = require("./req_statique.js");
@@ -75,7 +75,10 @@ const traite_requete = function (req, res) {
 				move(req, res, query, bfld, wave, oppo, heros);
 				break;
 			case '/req_jeu_survie':
-				req_jeu_survie(req, res, query);
+				req_jeu_survie(req, res, query, bfld, heros);
+				break;
+			case '/req_fin_survie' :
+				req_fin_survie(req, res, query);
 				break;
 			default:
 				req_static(req, res, query);
