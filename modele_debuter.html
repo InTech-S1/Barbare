@@ -10,8 +10,9 @@
 		{erreur}
 
 		<p/>
-
-		<form action="/req_jeu_histoire" method="GET">
+		
+     	<input type="hidden" name="sid" value="{sid}">
+		<form action="/req_jeu_histoire?sid={sid}" method="GET">
 			<input type="submit" name="action" value="Jeu mode histoire">
 		</form>
 
@@ -22,7 +23,18 @@
         </form>
 
         <p/>
+		
+		<form action="/req_accueil" method="GET">
+            <input type="submit" name="action" value="Retour accueil">
+        </form>
 
+        <p/>
+
+		<form action="/req_commencer" method="GET">
+            <input type="submit" name="action" value="Deconnexion">
+        </form>
+
+        <p/>
 
 	</body>
 </html>
