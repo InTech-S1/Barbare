@@ -42,13 +42,27 @@
         </form>
 
         <p/>
-	
-		<form action="/move" method="GET">
-            <input type="submit" name="action" value="Haut">
-			<input type="submit" name="action" value="Bas">
-			<input type="submit" name="action" value="Gauche">
-			<input type="submit" name="action" value="Droite">
-        </form>
+		<script>
+			window.addEventListener("keydown", function (event) {
+					if (event.keyCode === 90) {
+						event.preventDefault();
+						window.location = "http://localhost:5000/move?action=Haut&&key=" + event.keyCode;
+					} else if(event.keyCode === 83){
+						event.preventDefault();
+						window.location = "http://localhost:5000/move?action=Bas&&key=" + event.keyCode;
+					} else if(event.keyCode === 68){
+						event.preventDefault();
+						window.location = "http://localhost:5000/move?action=Droite&&key=68"
+					} else if(event.keyCode === 81){
+						event.preventDefault();
+						window.location = "http://localhost:5000/move?action=Gauche&&key=81"
+					} else if(event.keyCode === 32){
+						event.preventDefault();
+						window.location = "http://localhost:5000/move?action=Attaquer&&key=32"
+					}
+				});
+
+		</script>
 
 
 		<div class="bfld">
