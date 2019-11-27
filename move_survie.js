@@ -1,9 +1,9 @@
 "use strict";
 
-const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
+const move_survie = function(req, res, query, bfld, wave, oppo, heros, niveau){
 
-	const setup = require("./setup.js");
-	const pop_ennemi = require("./pop_ennemi.js");
+	const setup_survie = require("./setup_survie.js");
+	const pop_ennemi_survie = require("./pop_ennemi_survie.js");
 	const move_ennemi = require("./move_ennemi.js");
 	const dead_ennemi = require("./dead_ennemi.js");
 	const fin_niveau = require("./fin_niveau.js");
@@ -26,7 +26,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 				cy = j;
 				if (cy === 3 && wave[0] === 0){
 					console.log("cy = " + cy);
-        			pop_ennemi(req, res, query, bfld, oppo);
+        			pop_ennemi_survie(req, res, query, bfld, oppo, wave);
         			wave[0] = wave[0] + 1;
 					step = 1;
     			}else{
@@ -114,27 +114,19 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 
 	if(oppo.length === 0 && wave[0]!== 0){
 		wave[0] = wave[0] + 1;
-		if (wave[0] < 3){
-			pop_ennemi(req, res, query, bfld, oppo);
-			console.log(heros);
-			console.log(bfld);
-			console.log(oppo);
-			setup(req, res, query, bfld);
-			console.log(bfld);
-			console.log(wave[0]);
-		}else if (wave[0] === 3){
-        	fin_niveau(req, res, query, bfld, wave, oppo, heros, niveau);
-			console.log("le niveau actuel est :" + niveau[0]);
-    		niveau[0] = niveau[0] + 1;
+		for(let i = 0; i < wave[0]; i++){
+			pop_ennemi_survie(req, res, query, bfld, oppo, wave);
 		}
-	}else{
-		console.log(heros);
-		console.log(oppo);
-		console.log(bfld);
-		console.log(wave[0]);
-		setup(req, res, query, bfld);
+	}else if(perso.life <= 0){
+		req_fin_survie(req, res, query);
 	}
+	console.log(heros);
+	console.log(oppo);
+	console.log(bfld);
+	console.log("nombre de vagues : " + wave[0]);
+	setup_survie(req, res, query, bfld);
+	
 
 };
 
-module.exports = move;
+module.exports = move_survie;
