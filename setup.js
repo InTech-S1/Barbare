@@ -3,6 +3,8 @@
 const fs = require("fs");
 require("remedial");
 
+const map = require("./map.js");
+
 const setup = function(req, res, query, bfld){
 	
 	let marqueurs;
@@ -11,9 +13,9 @@ const setup = function(req, res, query, bfld){
 
 	page = fs.readFileSync('map.html', 'utf-8');
 	
-	console.log(bfld);
     marqueurs = {};
     marqueurs.erreur = "";
+	marqueurs.land = map(bfld);
 
 	for (let i=0; i < bfld.length; i++){
 		for(let j=0; j < bfld[0].length; j++){
@@ -22,10 +24,11 @@ const setup = function(req, res, query, bfld){
 				marqueurs[x] = "";
 			}else if(bfld[i][j] === "x"){
 				marqueurs[x] = "X";
+			}else if(bfld[i][j] === "o"){
+				marqueurs[x] = "O";
 			}
 		}
 	}
-	marqueurs.aa = "";
 
     page = page.supplant(marqueurs);
 
