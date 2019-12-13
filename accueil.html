@@ -1,24 +1,50 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<link rel="stylesheet" href="visuel_accueil.css" type="text/css">
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    	<script type="text/javascript">
+      // Mettez le code jQuery ici.
+      $(document).keydown(function(e){
+        switch (e.which){
+        	case 37:    // flèche gauche
+            $(".myDiv").finish().animate({
+                left: "-=10"
+            });
+            break;
+        	case 39:    // flèche droite
+            $(".myDiv").finish().animate({
+                left: "+=10"
+            });
+            break;
+        }
+    	});
+		</script>
 	</head>
-	<body>
-
-		<h2>Bienvenue sur la page d'accueil</h2>
-
+	<body><center>
+		
 		{erreur}
 		
+			<div id = 'header'>
+				<h2>Le Petit Barbare</h2>
+			</div>
+			
+		
 	    <form action="/req_commencer" method="GET">
-            <button name="action" value="creer">Cliquer ici pour vous identifer</button>
-        </form>
+            <button id = 'bouton' name="action" value="creer">Identifiez-vous !</button>
+        </form></br>
 
 
 		<form action="/req_afficher_formulaire_inscription" method="GET">
-            <button name="action" value="creer">Cliquer ici pour créer un compte</button>
-        </form>
-
-		<p/>
-
+            <button id = 'bouton' name="action" value="creer">Creer compte</button>
+		</form>
+		<div class="myDiv"></div>
+		<figure>
+			<audio autoplay = "true" src="music.mp3">
+				<code>audio</code> element.
+			</audio>
+		</figure>
+	</center>
 	</body>
 </html>

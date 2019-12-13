@@ -6,12 +6,19 @@ const http = require("http");
 const url = require("url");
 let mon_serveur;
 let port;
-let bfld = [];
-let e1 = [" "," "," "," "," "," "," "," "];
-let e2 = [" ","x"," "," "," "," "," "," "];
-let e3 = [" "," "," "," "," "," "," "," "];
-let e4 = [" "," "," "," "," "," "," "," "];
-bfld.push(e1, e2, e3, e4);
+let bfld = []; // TODO: Signification de l'abréviation bfld ?
+let e1 = ["1","1","1","1","1","1","1","1","1","1","1"];
+let e2 = ["1"," "," "," "," "," "," "," "," "," ","1"];
+let e3 = ["1"," "," "," "," "," "," "," "," "," ","1"];
+let e4 = [" "," "," "," "," "," "," "," "," "," ","1"];
+let e5 = ["1"," "," "," "," "," "," "," "," "," "," "];
+let e6 = ["1"," "," "," "," "," "," "," "," "," ","1"];
+let e7 = ["1","1","1","1","1","1","1","1","1","1","1"];
+bfld.push(e1, e2, e3, e4, e5, e6, e7);
+let wave = [0];
+let niveau = [1];
+let heros = [];
+let oppo = [];
 
 
 const req_accueil = require("./req_accueil.js");
@@ -22,8 +29,12 @@ const req_identifier = require("./req_identifier.js");
 const req_debuter = require("./req_debuter.js");
 const req_jeu_histoire = require("./req_jeu_histoire.js");
 const req_jeu_survie = require("./req_jeu_survie.js");
+const req_boutique = require("./req_boutique.js");
 
 const move = require("./move.js");
+const move_survie = require("./move_survie.js");
+
+//const req_actualiser = require("./req_actualiser.js");
 
 const req_static = require("./req_statique.js");
 const req_erreur = require("./req_erreur.js");
@@ -63,17 +74,26 @@ const traite_requete = function (req, res) {
 				req_identifier(req, res, query, uuidV4);
 				break;
 			case '/req_debuter':
-				req_debuter(req, res, query);
+				req_debuter(req, res, query, niveau, heros);
 				break;
 			case '/req_jeu_histoire':
-				req_jeu_histoire(req, res, query, bfld);
+				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau);
 				break;
 			case '/move':
-				move(req, res, query, bfld);
+				move(req, res, query, bfld, wave, oppo, heros, niveau);
 				break;
 			case '/req_jeu_survie':
-				req_jeu_survie(req, res, query);
+				req_jeu_survie(req, res, query, bfld, heros, oppo, wave);
 				break;
+			case '/move_survie':
+				move_survie(req, res, query, bfld, wave, oppo, heros, niveau);
+				break;
+			case '/req_boutique':
+				req_boutique(req, res, query);
+				break;
+			//case '/req_actualiser':
+			//	req_actualiser(req, res, query, maj, maj_ennemi);
+			//	break;
 			default:
 				req_static(req, res, query);
 				break;
