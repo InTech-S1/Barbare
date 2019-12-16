@@ -15,7 +15,11 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 	if(niveau[0] === 1){
 		heros.splice(0, 1);
 		heros.push(tmp);
-	}
+	}else{
+		heros[0].x = 3;
+		heros[0].y = 0;
+	}	
+
 //	let tmp2 = heros[0];
 //	tmp2.x = 1;
 //	tmp2.y = 1;
@@ -28,6 +32,7 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 
 	bfld[3][0] = "x";
 	wave[0] = 0;
+	niveau[0] = 1;
 	for(let k = 0; k < oppo.length; k++){
 		oppo.splice(k, 1);
 		k = k - 1;

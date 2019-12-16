@@ -22,10 +22,12 @@ const pop_ennemi = function(bfld){
 			}
 		}
 	}
+	console.log(espace);
 
 	for (i = 0; i < 3; i++) {
 		random = Math.floor(Math.random()*espace.length);
-		coor = espace.splice(random)[0]; 
+		coor = espace[random];
+		espace.splice(random, 1); 
 		console.log("longueur des cases vides = " + espace.length);
 		x = coor[0];
 		y = coor[1];
