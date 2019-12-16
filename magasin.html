@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <title>map</title>
+        <style type="text/css">
+			.body{
+				background-color: black;
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			 #input{
+				cursor: pointer;
+			}
+
+			.grille {
+				position: absolute;
+				top: 50%; left: 50%;
+				transform: translate(-50%, -50%);
+				width: 980px;
+				height: 560px;
+				margin: 25px;
+				border: 2px solid black;
+				background-image: url("magasin1.png");
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			.grille-ligne {
+				display: flex;
+				flex-direction: row;
+			}
+			.land{
+				float: left;
+				width: 87px;
+				height: 87px;
+				display: table-cell;
+				vertical-align: middle;
+				font-size: 30px;
+				text-align: center;
+			}
+			.perso{
+				height: 70px;
+				width: 70px;
+			}
+		</style>
+    </head>
+
+    <body class="body">
+        <div class='grille' id = 'grille'>
+            {land}
+        </div>
+
+        <form action="/req_debuter" method="GET">
+            <input id="input" type="submit" name="action" value="Retour accueil jeu">
+        </form>
+
+        <p/>
+	</body>
+</html>
+

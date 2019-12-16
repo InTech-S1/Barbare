@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+        <title>palier</title>
+        <style type="text/css">
+            .body{
+                background-color: black;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+             #input{
+                cursor: pointer;
+            }
+			#h5{
+				font-size: 10px;
+				font-family: "Algerian";
+    			color: rgb(255, 255, 255);
+    			text-align: center;
+
+			}
+
+            .shop {
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                width: 980px;
+                height: 560px;
+                margin: 25px;
+                border: 2px solid black;
+                background-image: url("magasin1.png");
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .grille-ligne {
+                display: flex;
+                flex-direction: row;
+            }
+			.land{
+                float: left;
+                width: 79px;
+                height: 56px;
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 30px;
+                text-align: center;
+            }
+            .perso{
+                height: 70px;
+                width: 70px;
+            }
+			.lettre{
+				font-size: 15px;
+			    font-family: 'Algerian';
+    			color: rgb(255, 255, 255);
+    			text-align: center;
+
+			}
+        </style>
+	</head>
+	<body class="body">
+		<form action="/req_debuter" method="GET">
+            <input id="input" type="submit" name="action" value="Retour accueil jeu">
+        </form>
+
+		<form action="/req_debuter" method="GET">
+            <input id="input" type="submit" name="action" value="Retour accueil jeu">
+        </form>
+		<div class="lettre">
+			<h2>Bravo, vous avez survecu, et vous etes desormais au niveau {level} </h2>
+			<span>Marchez jusqu'à la porte pour acceder au magasin</span>
+		</div>
+		{erreur}
+
+		<div class="shop" id="shop">
+			{grille}
+		</div>
+
+		<script>
+            window.addEventListener("keydown", function (event) {
+                let newUrl = null;
+                console.log(event.keyCode);
+
+                if (event.keyCode === 90) {
+                    newUrl = "http://localhost:5000/move_shop?action=Haut&&key=" + event.keyCode;
+                } else if(event.keyCode === 83){
+                    newUrl = "http://localhost:5000/move_shop?action=Bas&&key=" + event.keyCode;
+                } else if(event.keyCode === 68){
+                    newUrl = "http://localhost:5000/move_shop?action=Droite&&key=68";
+                } else if(event.keyCode === 81){
+                    newUrl = "http://localhost:5000/move_shop?action=Gauche&&key=81";
+                } 
+
+                if(newUrl !== null){
+                    event.preventDefault();
+                    fetch(newUrl)
+                        .then(function (reponse) { return reponse.json(); })
+                        .then(function (reponse) {
+                            // Récupération de l'élément DOM
+                            if(reponse.type === 'refresh'){
+								console.log("lol");
+                                const element = document.getElementById("shop");
+
+                                // Assignation du nouveau HTML
+                                element.innerHTML = reponse.value;
+                            } else if(reponse.type === 'update') {
+                            	document.innerHTML = reponse.value;
+								console.log('ok');
+								console.log(reponse.value);
+                            }
+                    
+                        });
+                }
+            });
+        </script>
+	</body>
+</html>
