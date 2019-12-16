@@ -3,19 +3,16 @@
 const fs = require("fs");
 require("remedial");
 
-const map = require("./map.js");
-
-const setup = function(req, res, query, bfld){
+const setup_survie = function(req, res, query, bfld){
 	
 	let marqueurs;
 	let page;
 	let N = [["aa","ab","ac","ad","ae","af","ag","ah"], ["ba","bb","bc","bd","be","bf","bg","bh"], ["ca","cb","cc","cd","ce","cf","cg","ch"], ["da","db","dc","dd","de","df","dg","dh"]];
 
-	page = fs.readFileSync('map.html', 'utf-8');
+	page = fs.readFileSync('survie.html', 'utf-8');
 	
     marqueurs = {};
     marqueurs.erreur = "";
-	marqueurs.land = map(bfld);
 
 	for (let i=0; i < bfld.length; i++){
 		for(let j=0; j < bfld[0].length; j++){
@@ -37,4 +34,4 @@ const setup = function(req, res, query, bfld){
     res.end();
 };
 
-module.exports = setup;
+module.exports = setup_survie;

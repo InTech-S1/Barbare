@@ -1,8 +1,3 @@
-//=========================================================================
-// Traitement de "req_commencer"
-// Auteurs : P. Thiré & T. Kerbrat
-// Version : 12/09/2018
-//=========================================================================
 "use strict";
 
 const fs = require("fs");
@@ -12,8 +7,6 @@ const trait = function (req, res, query) {
 
 	let marqueurs;
 	let page;
-
-	// AFFICHAGE DE LA PAGE D'ACCUEIL
 
 	page = fs.readFileSync('modele_accueil.html', 'utf-8');
 
@@ -26,6 +19,5 @@ const trait = function (req, res, query) {
 	res.write(page);
 	res.end();
 };
-//--------------------------------------------------------------------------
 
 module.exports = trait;
