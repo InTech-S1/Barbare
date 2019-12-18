@@ -39,6 +39,7 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 	}
 		
 	console.log(bfld);
+	console.log(niveau);
 
 	page = fs.readFileSync("map.html", "utf-8");
 	marqueurs = {};

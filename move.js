@@ -162,15 +162,21 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 			heros[0].pieces = heros[0].pieces + money;
     		niveau[0] = niveau[0] + 1;
 			
-			page = fs.readFileSync(
+		/*	page = fs.readFileSync(
 				(niveau[0] % 2 === 0 ? 'palier.html' : 'palier2.html'),
 				'utf-8'
 			);
 
 			marqueurs.erreur = "";
 			marqueurs.level = niveau[0];
+			if(niveau[0] % 2 === 0) {
+				reponse.value = '/req_boutique';
+			} else {
+				reponse.value = '/req_passer_niveau';
+			}*/
 			reponse.type = 'update';
-			reponse.value = page.supplant(marqueurs);
+			reponse.value = '/req_boutique';
+			console.log(reponse);
 		}
 	}else{
 		// Continuer le jeu.

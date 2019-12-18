@@ -1,3 +1,4 @@
+<!doctype html>
 <html>
 	<head>
 		<meta charset="UTF-8"> 
@@ -83,7 +84,7 @@
 								// Assignation du nouveau HTML
 								element.innerHTML = reponse.value;
 							} else if(reponse.type === 'update') {
-								document.querySelector('html').innerHTML = reponse.value;
+								window.location = reponse.value;
 							}
 					
 						});
