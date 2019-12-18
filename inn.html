@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <title>Interieur magasin</title>
+        <style type="text/css">
+			.body{
+				background-color: black;
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			 #input{
+				cursor: pointer;
+			}
+			.grille {
+				position: absolute;
+				top: 50%; left: 50%;
+				transform: translate(-50%, -50%);
+				width: 1400px;
+				height: 1060px;
+				margin: 25px;
+				border: 2px solid black;
+				background-image: url("/maps/43-c-inn.png");
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			.grille-ligne {
+				display: flex;
+				flex-direction: row;
+			}
+			.case{
+				float: left;
+				width: 50px;
+				height: 49px;
+				display: table-cell;
+				vertical-align: middle;
+				font-size: 30px;
+				text-align: center;
+			}
+			.perso{
+				height: 90px;
+				width: 90px;
+			}
+		</style>
+    </head>
+
+    <body class="body">
+        <div class='grille' id = 'grille'>
+            {land}
+        </div>
+
+		<script>
+            window.addEventListener("keydown", function (event) {
+                let newUrl = null;
+                console.log(event.keyCode);
+                if (event.keyCode === 90) {
+					console.log('oui');
+                    newUrl = "http://localhost:5000/move_inn?action=Haut&&key=" + event.keyCode;
+                } else if(event.keyCode === 83){
+                    newUrl = "http://localhost:5000/move_inn?action=Bas&&key=" + event.keyCode;
+                } else if(event.keyCode === 68){
+                    newUrl = "http://localhost:5000/move_inn?action=Droite&&key=68";
+                } else if(event.keyCode === 81){
+                    newUrl = "http://localhost:5000/move_inn?action=Gauche&&key=81";
+				} else if(event.keyCode === 32){
+					newUrl = "http://localhost:5000/move_inn?action=Entre&&key=32";
+				}
+                if(newUrl !== null){
+                    event.preventDefault();
+                    fetch(newUrl)
+                        .then(function (test) { return test.json(); })
+                        .then(function (test) {
+                            // Récupération de l'élément DOM
+                            if(test.type === 'refresh'){
+                                const element = document.getElementById("grille");
+                                // Assignation du nouveau HTML
+                                element.innerHTML = test.value;
+                            } else if(test.type === 'update') {
+                                window.location = test.value;
+                                console.log(test.value);
+                            }
+                    
+                        });
+				 	}
+            });
+        </script>
+	</body>
+</html>

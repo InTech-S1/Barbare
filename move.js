@@ -104,7 +104,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 				}
 			}
 			if (checktarget === 1){
-				damage = Math.floor(Math.random()*20) + 10;
+				damage = Math.floor(Math.random()*20) + 60;
 				target.life = target.life - damage;;
 			}
 		}else if (perso.scry === 0){
@@ -116,7 +116,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
                 }
             }
 			if (checktarget === 1){
-            	damage = Math.floor(Math.random()*20) + 10;
+            	damage = Math.floor(Math.random()*20) + 60;
 				target.life = target.life - damage;
 			}
 		}

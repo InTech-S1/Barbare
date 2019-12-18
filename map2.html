@@ -1,0 +1,94 @@
+<html>
+	<head>
+		<meta charset="UTF-8"> 
+		<title>Niveau 2</title>
+		<style type="text/css">
+		.body{
+			background-color: black;
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+		 #input{
+            cursor: pointer;
+        }
+        .bfld {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 980px;
+            height: 560px;
+            margin: 25px;
+            border: 2px solid black;
+            background-image: url("/maps/4-plaine.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .land{
+            float: left;
+            width: 87px;
+            height: 87px;
+            display: table-cell;
+            vertical-align: middle;
+            font-size: 30px;
+            text-align: center;
+        }
+		.perso{
+            height: 70px;
+            width: 70px;
+        }
+        .ghost{
+            height: 60px;
+            width: 50px;
+        }
+
+		</style>
+	</head>
+
+	<body class="body">
+		<div class='bfld' id = 'bfld'>
+			{land}
+		</div>
+
+		<form action="/req_debuter" method="GET">
+            <input id="input" type="submit" name="action" value="Retour accueil jeu">
+        </form>
+
+        <p/>
+        <script>
+            window.addEventListener("keydown", function (event) {
+				let newUrl = null;
+				console.log(event.keyCode);
+
+				if (event.keyCode === 90) {
+					newUrl = "http://localhost:5000/move?action=Haut&&key=" + event.keyCode;
+				} else if(event.keyCode === 83){
+					newUrl = "http://localhost:5000/move?action=Bas&&key=" + event.keyCode;
+				} else if(event.keyCode === 68){
+					newUrl = "http://localhost:5000/move?action=Droite&&key=68";
+				} else if(event.keyCode === 81){
+					newUrl = "http://localhost:5000/move?action=Gauche&&key=81";
+				} else if(event.keyCode === 32){
+					newUrl = "http://localhost:5000/move?action=Attaquer&&key=32";
+				}
+
+				if(newUrl !== null){
+					event.preventDefault();
+					fetch(newUrl)
+						.then(function (reponse) { return reponse.json(); })
+						.then(function (reponse) {
+							// Récupération de l'élément DOM
+							if(reponse.type === 'refresh'){
+								const element = document.getElementById("bfld");
+
+								// Assignation du nouveau HTML
+								element.innerHTML = reponse.value;
+							} else if(reponse.type === 'update') {
+								document.querySelector('html').innerHTML = reponse.value;
+							}
+					
+						});
+				}
+			});
+        </script>
+	</body>
+</html>

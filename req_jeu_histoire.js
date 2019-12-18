@@ -32,15 +32,15 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 
 	bfld[3][0] = "x";
 	wave[0] = 0;
-	niveau[0] = 1;
 	for(let k = 0; k < oppo.length; k++){
 		oppo.splice(k, 1);
 		k = k - 1;
 	}
 		
 	console.log(bfld);
-
-	page = fs.readFileSync("map.html", "utf-8");
+	
+	let n = niveau[0];
+	page = fs.readFileSync("map" + n +".html", "utf-8");
 	marqueurs = {};
 	marqueurs.land = map(bfld);
 
