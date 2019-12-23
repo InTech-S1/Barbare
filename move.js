@@ -34,7 +34,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 				cx = i;
 				cy = j;
 
-				if (cy === 3 && wave[0] === 0){
+				if (cy === 5 && wave[0] === 0){
 					console.log("cy = " + cy);
         			ennemi = pop_ennemi(bfld);
 					oppo.push(...ennemi);
@@ -70,7 +70,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 			}
         }
 	}else if(play === "Gauche"){
-		if (cy !== 0 && op === 0){
+		if (cy !== 2 && op === 0){
 			if (bfld[cx][cy-1] === " "){
             	bfld[cx][cy-1] = "x";
             	bfld[cx][cy] = " ";
@@ -82,7 +82,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 			}
         }
 	}else if (play === "Droite"){
-		if (cy !== 11 && op === 0){
+		if (cy !== 13 && op === 0){
             if (bfld[cx][cy+1] === " "){	
 				bfld[cx][cy+1] = "x";
             	bfld[cx][cy] = " ";
@@ -121,6 +121,13 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 			}
 		}
 	}
+//	else if (play === "Soin"){
+
+//	}else if (play === "Huile"){
+
+//	}else if (play === "Dague"){
+
+//	}
 	
 	dead_ennemi(bfld, oppo);
 
