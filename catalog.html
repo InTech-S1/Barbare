@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <title>Interieur magasin</title>
+        <style type="text/css">
+            .body{
+                background-color: black;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+             #input{
+                cursor: pointer;
+            }
+
+            .grille {
+                position: absolute;
+                top: 50%; left: 50%;
+                transform: translate(-50%, -50%);
+                width: 1400px;
+                height: 1060px;
+                margin: 25px;
+                border: 2px solid black;
+                background-image: url("catalog.png");
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .grille-ligne {
+                display: flex;
+                flex-direction: row;
+            }
+        </style>
+    </head>
+
+    <body class="body">
+        <div class='grille' id = 'grille'>
+           
+        </div>
+		<span> Maurueurs pour les objets a vendre, refaire la map de fond, utiliser le meme principe, dans le carre ecrire 'Bonjours qu'est ce que vous souhaitez acheter'.
+		{erreur}
+
+        <form action="/req_debuter" method="GET">
+            <input id="input" type="submit" name="action" value="Retour accueil jeu">
+        </form>
+	</body>
+</html>
+

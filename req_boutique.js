@@ -5,7 +5,7 @@ require("remedial");
 
 const magasin = require('./magasin.js');
 
-const req_boutique = function(req, res, query, grille_magasin){
+const acces_shop = function(req, res, query, grille_magasin){
 
 
 	let marqueurs;
@@ -15,23 +15,20 @@ const req_boutique = function(req, res, query, grille_magasin){
 
  	for(i = 0; i < grille_magasin.length; i ++){
         for(j = 0; j< grille_magasin[i].length; j++){
-			if(grille_magasin[i][j] === "x"){
+            if(grille_magasin[i][j] === "1"){
+                grille_magasin[i][j] = "";
+            
+			} else if(grille_magasin[i][j] === "m"){
+				grille_magasin[i][j] = "m";
+			} else {
 				grille_magasin[i][j] = " ";
 			}
-//            if(grille_magasin[i][j] === "1"){
-//                grille_magasin[i][j] = "";
-//           
-//			} else if(grille_magasin[i][j] === "m"){
-//				grille_magasin[i][j] = "m";
-//			} else {
-//				grille_magasin[i][j] = " ";
-//			}
-    	}
+        }
     }
 	grille_magasin[1][25] = "x";
-	console.log(grille_magasin);
+//	console.log(grille_magasin);
 
-	page = fs.readFileSync('shop.html', 'utf-8');
+	page = fs.readFileSync('palier.html', 'utf-8');
 	
 	marqueurs = {};
 	marqueurs.erreur = "";
@@ -45,4 +42,4 @@ const req_boutique = function(req, res, query, grille_magasin){
 
 };
 
-module.exports = req_boutique;
+module.exports = acces_shop;

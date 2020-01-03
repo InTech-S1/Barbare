@@ -7,13 +7,12 @@ const shop = require('./shop.js');
 
 const req_shop = function(req, res, query, grille_shop){
 
-	console.log("test");
 
     let marqueurs;
     let page;
     let i;
     let j;
-	
+
     for(i = 0; i < grille_shop.length; i ++){
         for(j = 0; j< grille_shop[i].length; j++){
             if(grille_shop[i][j] === "1"){
@@ -31,9 +30,10 @@ const req_shop = function(req, res, query, grille_shop){
         }
     }
     grille_shop[18][13] = "x";
-	console.log(grille_shop);
+//    console.log(grille_shop);
+	console.log("req_shop");
 
-    page = fs.readFileSync('inn.html', 'utf-8');
+    page = fs.readFileSync('magasin.html', 'utf-8');
 
     marqueurs = {};
     marqueurs.erreur = "";
@@ -48,3 +48,4 @@ const req_shop = function(req, res, query, grille_shop){
 };
 
 module.exports = req_shop;
+                                

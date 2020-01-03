@@ -2,13 +2,14 @@
 
 const fs = require("fs");
 require("remedial");
+
 const map = require('./map.js');
 const pop_ennemi = require("./pop_ennemi.js");
 const move_ennemi = require("./move_ennemi.js");
 const dead_ennemi = require("./dead_ennemi.js");
 const attaque_ennemi = require("./attaque_ennemi.js");
 
-const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
+const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_enemy){
 
 	let play = query.action;
 	let op = 0;
@@ -26,6 +27,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 	let marqueurs;
 	let page;
 	let reponse;
+	
 
 	// On fait apparaitre les ennemis que si le joueur est sur la 4ème ligne.
 	for(let i = 0; i < bfld.length; i++){
@@ -48,7 +50,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 	// Si le joueur n'a pas remplit les conditions, on fait déplacer et attaquer les ennemis.
  	if(step === 0){
 	    move_ennemi(bfld, oppo, heros);
-	  	attaque_ennemi(req, res, query, bfld, wave, oppo, heros, niveau);
+	  	attaque_ennemi(oppo, heros);
 	}
 	
 	if (play === "Haut"){
@@ -104,7 +106,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 				}
 			}
 			if (checktarget === 1){
-				damage = Math.floor(Math.random()*20) + 60;
+				damage = Math.floor(Math.random()*20) + 10;
 				target.life = target.life - damage;;
 			}
 		}else if (perso.scry === 0){
@@ -116,10 +118,13 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
                 }
             }
 			if (checktarget === 1){
-            	damage = Math.floor(Math.random()*20) + 60;
+            	damage = Math.floor(Math.random()*20) + 10;
 				target.life = target.life - damage;
+				console.log(target.life);
 			}
 		}
+		life_enemy = target.life;
+		console.log(life_enemy);
 	}
 	
 	dead_ennemi(bfld, oppo);
@@ -132,6 +137,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 	reponse = {
 		"type" : "",
 		"value" : "",
+		"life": "",
 	};
 	marqueurs = {};
 
@@ -151,33 +157,38 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 			ennemi = pop_ennemi(bfld);
 			oppo.push(...ennemi);
 
-			//page = fs.readFileSync('map.html', 'utf-8');
-			//marqueurs.land = map(bfld);
-
 			reponse.type = 'refresh';
-			reponse.value = map(bfld);
+			reponse.value = map(bfld, query);
+			//reponse.life = attaque_ennemi(oppo, heros);
 		}else if (wave[0] === 3){
 			// Niveau suivant.
 			money = Math.floor(Math.random()*10 + niveau[0]);
 			heros[0].pieces = heros[0].pieces + money;
     		niveau[0] = niveau[0] + 1;
 			
-			page = fs.readFileSync(
+		/*	page = fs.readFileSync(
 				(niveau[0] % 2 === 0 ? 'palier.html' : 'palier2.html'),
 				'utf-8'
 			);
 
 			marqueurs.erreur = "";
 			marqueurs.level = niveau[0];
+			if(niveau[0] % 2 === 0) {
+				reponse.value = '/req_boutique';
+			} else {
+				reponse.value = '/req_passer_niveau';
+			}*/
 			reponse.type = 'update';
-			reponse.value = page.supplant(marqueurs);
+			reponse.value = '/req_boutique';
 		}
 	}else{
 		// Continuer le jeu.
-		//page = fs.readFileSync('map.html', 'utf-8');
-		//marqueurs.land = map(bfld);
 		reponse.type = 'refresh';
-		reponse.value = map(bfld);
+		reponse.value = map(bfld, query);
+		reponse.life = attaque_ennemi(oppo, heros);
+
+		
+	
 	}
 
 	res.writeHead(200, {'Content-Type' : 'application/json'});

@@ -4,8 +4,8 @@ const fs = require('fs');
 require('remedial');
 
 const magasin = require('./magasin.js');
+//const shop = require("./shop.js");
 //const req_shop = require('./req_shop.js');
-//const shop = require('./shop.js');
 
 const move_shop = function(res, req, query, grille_magasin) {
 
@@ -16,7 +16,7 @@ const move_shop = function(res, req, query, grille_magasin) {
 	let reponse;
 	let cx;
 	let cy;
-	let enter = false;
+	let max = false;
 
 	for(i = 0; i < grille_magasin.length; i ++){
         for(j = 0; j< grille_magasin[i].length; j++){
@@ -32,12 +32,11 @@ const move_shop = function(res, req, query, grille_magasin) {
            if (grille_magasin[cx-1][cy] === " "){
                grille_magasin[cx-1][cy] = "x";
                grille_magasin[cx][cy] = " ";
-           } 
-//		   else if (grille_magasin[cx-1][cy] === "m"){
-//				console.log('ok');
-//				max = true;
-//			}
-       }
+           } else if (grille_magasin[cx-1][cy] === "m"){
+				console.log('ok');
+				max = true;
+			}
+        }
     }else if(play === "Bas"){
         if (cx !== 19){
             if (grille_magasin[cx+1][cy] === " "){ 
@@ -50,12 +49,11 @@ const move_shop = function(res, req, query, grille_magasin) {
             if (grille_magasin[cx][cy-1] === " "){
                 grille_magasin[cx][cy-1] = "x";
                 grille_magasin[cx][cy] = " ";
- 			} 
-//			else if(grille_magasin[cx][cy-1] === "m"){
-//				console.log('ok');
-//				max = true;
-//			}
-       }
+ 			} else if(grille_magasin[cx][cy-1] === "m"){
+				console.log('ok');
+				max = true;
+			}
+        }
     }else if (play === "Droite"){
         if (cy !== 25 ){
             if (grille_magasin[cx][cy+1] === " "){
@@ -63,11 +61,7 @@ const move_shop = function(res, req, query, grille_magasin) {
                 grille_magasin[cx][cy] = " ";
             } 
 		}
-	}else if (play === "Interaction"){
-		if(grille_magasin[cx-1][cy] === "m"){
-			enter = true;
-		}
-	}
+	} 
 
     reponse = {
         "type" : "",
@@ -75,18 +69,19 @@ const move_shop = function(res, req, query, grille_magasin) {
     };
     marqueurs = {};
 
-	if(enter === true){
-		
+	if(max === true){
+		 // Afficher l'intérieur du magasin 
+
 		reponse.type = 'update';
 		reponse.value = '/req_shop';
 		console.log(reponse);
-		
 	}else{
-        // Aller jusqu'au magasin.
+        // Sortir du magasin par la porte d'entrée.
         reponse.type = 'refresh';
         reponse.value = magasin(grille_magasin, query);
     }
 
+	//console.log(grille_shop);
     res.writeHead(200, {'Content-Type' : 'application/json'});
     res.write(JSON.stringify(reponse));
     res.end();

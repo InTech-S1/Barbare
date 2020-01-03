@@ -16,20 +16,42 @@ const magasin = function (grille_magasin, query) {
 
 		for (j = 0; j < grille_magasin[i].length; j++) {
 			if (grille_magasin[i][j] === " ") {
-				html += '<div class="land"></div>';
+				html += '<div class="case"></div>';
 
 			} else if (grille_magasin[i][j] === "x") {
-				html += '<div class="land"><img class="perso" src="hero.gif"></div>';
-			} else if (grille_magasin[i][j] === "1") {
-				html += '<div class="land"></div>';
+				html += '<div class="case"><img class="perso" src="hero.gif"></div>';
+				/*if(query.action === "Gauche"){
+					html += '<div class="case"><img class="perso" src="attaque_gauche.gif"></div>';
+				} else {
+					html += '<div class="case"><img class="perso" src="hero.gif"></div>';
+				}
+				/*if(query.action == "Droite"){
+					if(grille_magasin[i][j+1] === ""){
+						html += '<h5 id="h5">NON</h5>';
+					}
+				} else if (query.action === "Gauche"){
+					if(grille_magasin[i][j-1] === ""){
+						html += '<h5 id="h5">NON</h5>';
+					}
+				} else if (query.action === "Haut") {
+					if(grille_magasin[i-1][j] === ""){
+						html += '<h5 id="h5">NON</h5>';
+					}
+				} else if (query.action === "Bas"){
+					if(grille_magasin[i+1][j] === ""){
+						html += '<h5 id="h5">NON</h5>';
+					}
+				}*/
+			} else if (grille_magasin[i][j] === "") {
+				html += '<div class="case"></div>';
 			} else if(grille_magasin[i][j] === "m"){
-				html += '<div class="land"></div>';
+				html += '<div class="case"></div>';
 			}
 		}
 
 		html += '</div>';
 	}
-	
+
 	return html;
 
 };

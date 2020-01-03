@@ -15,7 +15,6 @@ let e5 = ["1"," "," "," "," "," "," "," "," "," ","1"];
 let e6 = ["1"," "," "," "," "," "," "," "," "," ","1"];
 let e7 = ["1","1","1","1","1","1","1","1","1","1","1"];
 bfld.push(e1, e2, e3, e4, e5, e6, e7);
-
 let grille_magasin = [];
 let a1 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"];
 let a2 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " "];
@@ -23,8 +22,8 @@ let a3 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", 
 let a4 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1"];
 let a5 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1"];
 let a6 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1"];
-let a7 = ["1","1","1","1","1","1","1","1","1","m","1", "1", "1", "1", " ", "1", "1", "1", "1", " ", " ", " ", " ", "1", "1", "1"];
-let a8 = ["1","1","1","1","1","1","1","1"," "," "," ", "1", "1", " ", " ", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " "];
+let a7 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", "1", "1", "1", "1", " ", " ", " ", " ", "1", "1", "1"];
+let a8 = ["1","1","1","1","1","1","1","1"," ","m"," ", "1", "1", " ", " ", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " "];
 let a9 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", "1", " ", " ", "1", "1", "1", "1", " ", " ", " ", "1", "1", " ", " "];
 let a10 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", " ", " ", " ", "1", "1", "1", "1", " ", " ", " ", "1", "1", " ", " "];
 let a11 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", " ", " ", " ", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " "];
@@ -38,7 +37,6 @@ let a18 = ["1","1","1","1","1","1","1"," "," "," "," ", " ", " ", " ", " ", " ",
 let a19 = ["1","1","1"," "," "," "," "," "," "," "," ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1", " "];
 let a20 = ["1","1"," "," "," "," "," "," "," ","1","1", "1", "1", " ", " ", " ", " ", "1", "1", " ", " ", " ", "1", "1", "1", " "];
 grille_magasin.push(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
-
 let grille_shop = [];
 let b1 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"];
 let b2 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"];
@@ -67,6 +65,8 @@ let wave = [0];
 let niveau = [1];
 let heros = [];
 let oppo = [];
+let nom =[];
+let life_enemy ;
 
 
 const req_accueil = require("./req_accueil.js");
@@ -78,11 +78,12 @@ const req_debuter = require("./req_debuter.js");
 const req_jeu_histoire = require("./req_jeu_histoire.js");
 const req_jeu_survie = require("./req_jeu_survie.js");
 const req_boutique = require("./req_boutique.js");
-const req_shop = require("./req_shop.js");
+const req_shop = require('./req_shop.js');
+const req_catalog = require('./req_catalog.js');
 
 const move = require("./move.js");
 const move_shop = require("./move_shop.js");
-const move_inn = require("./move_inn.js");
+const move_shop_intern = require('./move_shop_intern.js');
 const move_survie = require("./move_survie.js");
 
 //const req_actualiser = require("./req_actualiser.js");
@@ -122,16 +123,22 @@ const traite_requete = function (req, res) {
 				req_inscrire(req, res, query);
 				break;
 			case '/req_identifier':
-				req_identifier(req, res, query, uuidV4);
+				req_identifier(req, res, query, uuidV4, nom);
 				break;
 			case '/req_debuter':
 				req_debuter(req, res, query, niveau, heros);
 				break;
 			case '/req_jeu_histoire':
-				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau);
+				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau, nom);
 				break;
 			case '/move':
-				move(req, res, query, bfld, wave, oppo, heros, niveau);
+				move(req, res, query, bfld, wave, oppo, heros, niveau, life_enemy);
+				break;
+			case '/move_shop': 
+				move_shop(res, req, query, grille_magasin);
+				break;
+			case '/move_shop_intern':
+				move_shop_intern(res, req, query, grille_shop);
 				break;
 			case '/req_jeu_survie':
 				req_jeu_survie(req, res, query, bfld, heros, oppo, wave);
@@ -142,18 +149,12 @@ const traite_requete = function (req, res) {
 			case '/req_boutique':
 				req_boutique(req, res, query, grille_magasin);
 				break;
-			case '/move_shop':
-				move_shop(res, req, query, grille_magasin);
-				break;
 			case '/req_shop':
 				req_shop(req, res, query, grille_shop, grille_magasin);
 				break;
-			case '/move_inn':
-				move_inn(res, req, query, grille_shop, grille_magasin);
+			case '/req_catalog':
+				req_catalog(req, res, query);
 				break;
-			//case '/req_actualiser':
-			//	req_actualiser(req, res, query, maj, maj_ennemi);
-			//	break;
 			default:
 				req_static(req, res, query);
 				break;

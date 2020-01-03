@@ -2,88 +2,40 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-        <title>Magasin</title>
-        <style type="text/css">
-            .body{
-                background-color: black;
-                background-size: cover;
-                background-repeat: no-repeat;
-            }
-             #input{
-                cursor: pointer;
-            }
-            .shop {
-                position: absolute;
-                top: 50%; left: 50%;
-                transform: translate(-50%, -50%);
-                width: 980px;
-                height: 560px;
-                margin: 25px;
-                border: 2px solid black;
-                background-image: url("/maps/42-c-magasin.png");
-                background-size: cover;
-                background-repeat: no-repeat;
-            }
-            .grille-ligne {
-                display: flex;
-                flex-direction: row;
-            }
-			.land{
-                float: left;
-                width: 38px;
-                height: 27px;
-                display: table-cell;
-                vertical-align: middle;
-                font-size: 30px;
-                text-align: center;
-            }
-            .perso{
-                display: table-cell;
-                vertical-align: middle;
-                text-align: center;
-                height: 60px;
-                width: 50px;
-            }
-        </style>
+		<title>Magasin</title>
 	</head>
-	<body class="body">
+	<body>
 
-		<div class="shop" id="shop">
-			{grille}
-		</div>
-	
-		<script>
-            window.addEventListener("keydown", function (event) {
-                let newUrl = null;
-                console.log(event.keyCode);
-                if (event.keyCode === 90) {
-                    newUrl = "http://localhost:5000/move_shop?action=Haut&&key=" + event.keyCode;
-                } else if(event.keyCode === 83){
-                    newUrl = "http://localhost:5000/move_shop?action=Bas&&key=" + event.keyCode;
-                } else if(event.keyCode === 68){
-                    newUrl = "http://localhost:5000/move_shop?action=Droite&&key=68";
-                } else if(event.keyCode === 81){
-                    newUrl = "http://localhost:5000/move_shop?action=Gauche&&key=81";
-                } else if(event.keyCode === 32){
-					newUrl = "http://localhost:5000/move_shop?action=Interaction&&key=32";
-				}
-                if(newUrl !== null){
-                    event.preventDefault();
-                    fetch(newUrl)
-                        .then(function (reponse) { return reponse.json(); })
-                        .then(function (reponse) {
-                            // Récupération de l'élément DOM
-                            if(reponse.type === 'refresh'){
-                                const element = document.getElementById("shop");
-                                // Assignation du nouveau HTML
-                                element.innerHTML = reponse.value;
-                            } else if(reponse.type === 'update') {
-                            	window.location = reponse.value;
-                            }
-                    
-                        });
-                }
-            });
-        </script>
+		<h2>Bienvenue dans le magasin</h2>
+
+		{erreur}
+		
+	    <form action="/achat" method="GET">
+            <button name="action" value="acheter">acheter une hache</button>
+        </form>
+		
+		<form action="/req" method="GET">
+            <button name="action" value="acheter">acheter une dague</button>
+        </form>
+
+		<form action="/achat" method="GET">
+            <button name="action" value="acheter">acheter un bouclier</button>
+        </form>
+
+		<form action="/achat" method="GET">
+            <button name="action" value="acheter">acheter une potion</button>
+        </form>
+		
+		<form action="/achat" method="GET">
+            <button name="action" value="acheter">acheter une huile</button>
+        </form>
+
+		<form action="/req_jeu_histoire" method="GET">
+            <button name="action" value="Niveau">passer au niveau suivant</button>
+        </form>
+
+
+		<p/>
+
 	</body>
 </html>

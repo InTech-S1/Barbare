@@ -33,7 +33,7 @@ const pop_ennemi = function(bfld){
 		y = coor[1];
 		console.log(x, y);
 		bfld[x][y] = "o";
-		nvEnnemi = { "x": x, "y": y, "life": 60, "scry": 0 };
+		nvEnnemi = { "x": x, "y": y, "life": 20, "scry": 0 };
 		oppo.push(nvEnnemi);
 	}
 
