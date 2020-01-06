@@ -16,10 +16,11 @@ const move_inn = function(res, req, query, grille_shop, grille_magasin) {
     let cx;
     let cy;
     let max = false;
-	let buy = false;
 	let exit = false;
 	
 //	console.log(grille_shop);
+
+	let act = "nothing";
 
     for(i = 0; i < grille_shop.length; i ++){
         for(j = 0; j< grille_shop[i].length; j++){
@@ -36,17 +37,17 @@ const move_inn = function(res, req, query, grille_shop, grille_magasin) {
 				console.log('haut');
                 grille_shop[cx-1][cy] = "x";
                 grille_shop[cx][cy] = " ";
-           } else if(grille_shop[cx-1][cy] === "s"){
-		   		exit = true;
-		   }
+           } 
+//		   else if(grille_shop[cx-1][cy] === "s"){
+//		   		exit = true;
+//		   }
         }
     }else if(play === "Bas"){
-        if (cx !== 20){
+        if (cx !== 11){
             if (grille_shop[cx+1][cy] === " "){
                 grille_shop[cx+1][cy] = "x";
                 grille_shop[cx][cy] = " ";
             }else if (grille_shop[cx+1][cy] === "m"){
-                console.log('ok');
                 max = true;
             }
 
@@ -59,7 +60,7 @@ const move_inn = function(res, req, query, grille_shop, grille_magasin) {
             }  
         }
     }else if (play === "Droite"){
-        if (cy !== 26 ){
+        if (cy !== 20){
             if (grille_shop[cx][cy+1] === " "){
                 grille_shop[cx][cy+1] = "x";
                 grille_shop[cx][cy] = " ";
@@ -67,10 +68,16 @@ const move_inn = function(res, req, query, grille_shop, grille_magasin) {
 		}
     }
 //	else if(play === "Interaction"){
-//		if(grille_shop[cx-1][cy] === "c"){
-//			buy = true;
+//		if(grille_shop[cx-1][cy] === "l"){
+//			act = "loot";
+//		}else if(grille_shop[cx-1][cy] === "s"){
+//			act = "save";
+//		}else if(grille_shop[cx-1][cy] === "e"){
+//			act = "eat";
+//		}else if(grille_shop[cx-1][cy] === "d"){
+//			act = "drink";
 //		}
-//}
+//	}
 
     test = {
         "type" : "",
@@ -78,20 +85,21 @@ const move_inn = function(res, req, query, grille_shop, grille_magasin) {
     };
     marqueurs = {};
 
-    if(buy === true){
+//    if(buy === true){
 		
-        test.type = 'update';
+//        test.type = 'update';
 //      test.value = '/req_catalog';
        
-    } else if(max === true){
+    if(max === true){
 
 		test.type = 'update';
 		test.value = '/req_boutique';
 
-	} else if(exit === true){
-		test.type = 'update';
-		test.value = '/req_jeu_histoire';
 	} 
+//	else if(exit === true){
+//		test.type = 'update';
+//		test.value = '/req_jeu_histoire';
+//	} 
 	
 	else{
         // Aller jusqu'au magasin.

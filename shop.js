@@ -21,13 +21,15 @@ const interieur_magasin = function (grille_shop, query) {
             } else if (grille_shop[i][j] === "x") {
                 html += '<div class="case"><img class="perso" src="hero.gif"></div>';
 			
-			} else if (grille_shop[i][j] === "") {
+			} else if (grille_shop[i][j] === "1") {
                 html += '<div class="case"></div>';
-            } else if(grille_shop[i][j] === "c"){
+            } else if(grille_shop[i][j] === "l"){
                 html += '<div class="case"></div>';
-            } else if(grille_shop[i][j] === "m"){
+            } else if(grille_shop[i][j] === "s"){
 				html += '<div class="case"></div>';
-			} else if(grille_shop[i][j] === "s"){
+			} else if(grille_shop[i][j] === "e"){
+				html += '<div class="case"></div>';
+			}else if(grille_shop[i][j] === "d"){
 				html += '<div class="case"></div>';
 			}
         }

@@ -30,16 +30,16 @@
 			}
 			.case{
 				float: left;
-				width: 50px;
-				height: 49px;
+				width: 60px;
+				height: 44px;
 				display: table-cell;
 				vertical-align: middle;
 				font-size: 30px;
 				text-align: center;
 			}
 			.perso{
-				height: 90px;
-				width: 90px;
+				height: 60px;
+				width: 70px;
 			}
 		</style>
     </head>
@@ -63,7 +63,7 @@
                 } else if(event.keyCode === 81){
                     newUrl = "http://localhost:5000/move_inn?action=Gauche&&key=81";
 				} else if(event.keyCode === 32){
-					newUrl = "http://localhost:5000/move_inn?action=Entre&&key=32";
+					newUrl = "http://localhost:5000/move_inn?action=Interaction&&key=32";
 				}
                 if(newUrl !== null){
                     event.preventDefault();
