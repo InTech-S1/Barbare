@@ -2,13 +2,14 @@
 
 const fs = require("fs");
 require("remedial");
+
 const map = require('./map.js');
 const pop_ennemi = require("./pop_ennemi.js");
 const move_ennemi = require("./move_ennemi.js");
 const dead_ennemi = require("./dead_ennemi.js");
 const attaque_ennemi = require("./attaque_ennemi.js");
 
-const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
+const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_enemy){
 
 	let play = query.action;
 	let op = 0;
@@ -48,7 +49,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 	// Si le joueur n'a pas remplit les conditions, on fait déplacer et attaquer les ennemis.
  	if(step === 0){
 	    move_ennemi(bfld, oppo, heros);
-	  	attaque_ennemi(req, res, query, bfld, wave, oppo, heros, niveau);
+	  	attaque_ennemi(oppo, heros);
 	}
 	
 	if (play === "Haut"){
@@ -120,6 +121,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 				target.life = target.life - damage;
 			}
 		}
+		life_enemy = target.life;
 	}
 //	else if (play === "Soin"){
 
@@ -162,7 +164,8 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 			//marqueurs.land = map(bfld);
 
 			reponse.type = 'refresh';
-			reponse.value = map(bfld);
+			reponse.value = map(bfld, query);
+			//reponse.life = attaque_ennemi(oppo, hero);
 		}else if (wave[0] === 3){
 			// Niveau suivant.
 			money = Math.floor(Math.random()*10 + niveau[0]);
@@ -184,7 +187,8 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau){
 		//page = fs.readFileSync('map.html', 'utf-8');
 		//marqueurs.land = map(bfld);
 		reponse.type = 'refresh';
-		reponse.value = map(bfld);
+		reponse.value = map(bfld, query);
+		reponse.life = attaque_ennemi(oppo, heros);
 	}
 
 	res.writeHead(200, {'Content-Type' : 'application/json'});

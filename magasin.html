@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8"> 
+        <title>Interieur magasin</title>
+        <style type="text/css">
+			.body{
+				background-color: black;
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			 #input{
+				cursor: pointer;
+			}
+
+			.grille {
+				position: absolute;
+				top: 50%; left: 50%;
+				transform: translate(-50%, -50%);
+				width: 1400px;
+				height: 1060px;
+				margin: 25px;
+				border: 2px solid black;
+				background-image: url("intern-shop-1.png");
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+			.grille-ligne {
+				display: flex;
+				flex-direction: row;
+			}
+			.case{
+				float: left;
+				width: 50px;
+				height: 49px;
+				display: table-cell;
+				vertical-align: middle;
+				font-size: 30px;
+				text-align: center;
+			}
+			.perso{
+				height: 90px;
+				width: 90px;
+			}
+		</style>
+    </head>
+
+    <body class="body">
+        <div class='grille' id = 'grille'>
+            {land}
+        </div>
+
+        <form action="/req_debuter" method="GET">
+            <input id="input" type="submit" name="action" value="Retour accueil jeu">
+        </form>
+		<script>
+            window.addEventListener("keydown", function (event) {
+                let newUrl = null;
+                console.log(event.keyCode);
+
+                if (event.keyCode === 90) {
+					console.log('oui');
+                    newUrl = "http://localhost:5000/move_shop_intern?action=Haut&&key=" + event.keyCode;
+                } else if(event.keyCode === 83){
+                    newUrl = "http://localhost:5000/move_shop_intern?action=Bas&&key=" + event.keyCode;
+                } else if(event.keyCode === 68){
+                    newUrl = "http://localhost:5000/move_shop_intern?action=Droite&&key=68";
+                } else if(event.keyCode === 81){
+                    newUrl = "http://localhost:5000/move_shop_intern?action=Gauche&&key=81";
+				} else if(event.keyCode === 13){
+					newUrl = "http://localhost:5000/move_shop_intern?action=Entre&&key=13";
+				}
+                if(newUrl !== null){
+                    event.preventDefault();
+                    fetch(newUrl)
+                        .then(function (test) { return test.json(); })
+                        .then(function (test) {
+                            // Récupération de l'élément DOM
+                            if(test.type === 'refresh'){
+                                console.log("lol");
+                                const element = document.getElementById("grille");
+
+                                // Assignation du nouveau HTML
+                                element.innerHTML = test.value;
+                            } else if(test.type === 'update') {
+                                window.location = test.value;
+                                console.log('ok');
+                                console.log(test.value);
+                            }
+                    
+                        });
+				 	}
+            });
+        </script>
+	</body>
+</html>
+

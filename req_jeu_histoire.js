@@ -6,12 +6,13 @@ const fs = require("fs");
 require('remedial');
 
 const map = require("./map.js");
+const life_perso = require('./attaque_ennemi.js');
 
-const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niveau){
+const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niveau, nom, life_enemy){
 	
 	let marqueurs;
 	let page;
-	let tmp = {"x" : 3, "y" : 2, "life" : 200, "scry" : 1, "epee" : 1, "hache" : 0, "dague" : 0, "huile" : 0, "pieces" : 0};
+	let tmp = {"x" : 3, "y" : 2, "life" : 100, "scry" : 1, "epee" : 1, "hache" : 0, "dague" : 0, "huile" : 0, "pieces" : 0};
 	if(niveau[0] === 1){
 		heros.splice(0, 1);
 		heros.push(tmp);
@@ -42,11 +43,20 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 	}
 		
 	console.log(bfld);
+	console.log(niveau);
+    console.log(nom + "nom");
+    console.log(tmp.life);
+
 	
 	let n = niveau[0];
 	page = fs.readFileSync("map" + n +".html", "utf-8");
 	marqueurs = {};
-	marqueurs.land = map(bfld);
+	marqueurs.land = map(bfld, query);
+	marqueurs.life = life_perso(oppo, heros) + "%";
+    marqueurs.nom = nom[0];
+    marqueurs.level = niveau[0];
+    marqueurs.m1 = 110; //life_enemi;
+
 
 	res.writeHead(200, {'Content-Type' : 'text/html'});
     res.write(page.supplant(marqueurs));

@@ -1,7 +1,7 @@
 "use strict";
 
 // TODO: Supprimer les paramètres inutiles de la fonction.
-const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau){
+const attaque_ennemi = function(oppo, heros){
 
 	let degats;
 	let perso = heros[0];
@@ -9,6 +9,7 @@ const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau
 	let target;
 	let checktarget = 0;
 	let succes;
+	let life;
 
 	for(let i = 0; i < oppo.length; i++){
 		tmp = oppo[i];
@@ -49,6 +50,9 @@ const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau
             checktarget = 0;
         }
     }
+    life = perso.life;
+    console.log(life + "life");
+    return life;
 
 
 };

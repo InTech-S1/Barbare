@@ -1,14 +1,9 @@
-//=========================================================================
-// Traitement de "req_identifier"
-// Auteurs : P. Thiré & T. Kerbrat
-// Version : 12/09/2018
-//=========================================================================
 "use strict";
 
 const fs = require("fs");
 require('remedial');
 
-const trait = function (req, res, query, uuidV4) {
+const trait = function (req, res, query, uuidV4, nom) {
 
 	let marqueurs;
 	let pseudo;
@@ -42,7 +37,7 @@ const trait = function (req, res, query, uuidV4) {
 	// ON RENVOIT UNE PAGE HTML 
 
 	if (trouve === true) {
-		
+		nom.push(query.pseudo);
 		page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
 		marqueurs = {};
         marqueurs.sid = uuidV4();
@@ -65,6 +60,5 @@ const trait = function (req, res, query, uuidV4) {
 	res.end();
 };
 
-//---------------------------------------------------------------------------
 
 module.exports = trait;

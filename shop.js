@@ -16,7 +16,7 @@ const interieur_magasin = function (grille_shop, query) {
 
         for (j = 0; j < grille_shop[i].length; j++) {
             if (grille_shop[i][j] === " ") {
-                html += '<div class="case"></div>';
+                html += '<div class="case">1</div>';
 
             } else if (grille_shop[i][j] === "x") {
                 html += '<div class="case"><img class="perso" src="hero.gif"></div>';
@@ -29,8 +29,8 @@ const interieur_magasin = function (grille_shop, query) {
 				html += '<div class="case"></div>';
 			} else if(grille_shop[i][j] === "e"){
 				html += '<div class="case"></div>';
-			}else if(grille_shop[i][j] === "d"){
-				html += '<div class="case"></div>';
+			} else if(grille_shop[i][j] === "d"){
+                html += '<div class="case"></div>';
 			}
         }
 
