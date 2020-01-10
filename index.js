@@ -43,8 +43,8 @@ let grille_shop = [];
 let b1 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"];
 let b2 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"];
 let b3 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","e","e","1","1","1","1","1","1"];
-let b4 = ["1","1","1","1","1","l","l","l","1","1","1","1","1"," "," "," ","1","1"," ","d","1"];
-let b5 = ["1","1","1","1","1","1","1","1"," "," "," "," "," "," "," "," ","1","1"," ","d","d"];
+let b4 = ["1","1","1","1","1","1","1","1","1","1","1","1","1"," "," "," ","1","1"," ","d","1"];
+let b5 = ["1","1","1","1","l","l","l","1"," "," "," "," "," "," "," "," ","1","1"," ","d","d"];
 let b6 = ["1","1","1"," "," "," "," ","1"," ","1"," ","1","1"," ","1"," "," "," "," "," ","1"];
 let b7 = ["1","1","1"," "," "," "," ","1"," ","1","1","1","1"," ","1","1","1","1","1","1","1"];
 let b8 = ["1","1","1"," ","1"," ","1","1","1","1","1","1","1"," ","1","1","1","1","1","1","1"];
@@ -58,7 +58,8 @@ let wave = [0];
 let niveau = [1];
 let heros = [];
 let oppo = [];
-
+let save = [1,200,1,0,0,0,0];
+let save2 = [1,200,1,0,0,0,0];
 
 const req_accueil = require("./req_accueil.js");
 const req_commencer = require("./req_commencer.js");
@@ -67,6 +68,9 @@ const req_inscrire = require("./req_inscrire.js");
 const req_identifier = require("./req_identifier.js");
 const req_debuter = require("./req_debuter.js");
 const req_jeu_histoire = require("./req_jeu_histoire.js");
+const req_accueil_sauvegarde = require("./req_accueil_sauvegarde.js");
+const req_sauvegarde = require("./req_sauvegarde.js");
+const req_load = require("./req_load.js");
 const req_jeu_survie = require("./req_jeu_survie.js");
 const req_boutique = require("./req_boutique.js");
 const req_shop = require("./req_shop.js");
@@ -113,7 +117,7 @@ const traite_requete = function (req, res) {
 				req_inscrire(req, res, query);
 				break;
 			case '/req_identifier':
-				req_identifier(req, res, query, uuidV4);
+				req_identifier(req, res, query, uuidV4, save, save2);
 				break;
 			case '/req_debuter':
 				req_debuter(req, res, query, niveau, heros);
@@ -123,6 +127,15 @@ const traite_requete = function (req, res) {
 				break;
 			case '/move':
 				move(req, res, query, bfld, wave, oppo, heros, niveau);
+				break;
+			case '/req_accueil_sauvegarde':
+				req_accueil_sauvegarde(req, res, query, heros, niveau);
+				break;
+			case '/req_sauvegarde':
+				req_sauvegarde(req, res, query, heros, niveau);
+				break;
+			case '/req_load':
+				req_load(req, res, query, bfld, heros, oppo, wave, niveau, save, save2);
 				break;
 			case '/req_jeu_survie':
 				req_jeu_survie(req, res, query, bfld, heros, oppo, wave);

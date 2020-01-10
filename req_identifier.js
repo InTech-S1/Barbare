@@ -1,14 +1,9 @@
-//=========================================================================
-// Traitement de "req_identifier"
-// Auteurs : P. Thiré & T. Kerbrat
-// Version : 12/09/2018
-//=========================================================================
 "use strict";
 
 const fs = require("fs");
 require('remedial');
 
-const trait = function (req, res, query, uuidV4) {
+const trait = function (req, res, query, uuidV4, save, save2) {
 
 	let marqueurs;
 	let pseudo;
@@ -34,6 +29,23 @@ const trait = function (req, res, query, uuidV4) {
 		if (listeMembres[i].pseudo === query.pseudo) {
 			if (listeMembres[i].password === query.password) {
 				trouve = true;
+				save[0] = Number(listeMembres[i].sauvegarde1);
+				save[1] = Number(listeMembres[i].pv1);
+				save[2] = Number(listeMembres[i].epee1);
+				save[3] = Number(listeMembres[i].hache1);
+				save[4] = Number(listeMembres[i].dague1);
+				save[5] = Number(listeMembres[i].huile1);
+				save[6] = Number(listeMembres[i].pieces1);
+
+
+				save2[0] = Number(listeMembres[i].sauvegarde2);
+				save2[1] = Number(listeMembres[i].pv2);
+                save2[2] = Number(listeMembres[i].epee2);
+                save2[3] = Number(listeMembres[i].hache2);
+                save2[4] = Number(listeMembres[i].dague2);
+                save2[5] = Number(listeMembres[i].huile2);
+                save2[6] = Number(listeMembres[i].pieces2);
+
 			}
 		}
 		i++;

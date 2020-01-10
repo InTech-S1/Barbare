@@ -74,7 +74,7 @@ const move_inn = function(res, req, query, grille_shop, grille_magasin) {
 //			act = "save";
 //		}else if(grille_shop[cx-1][cy] === "e"){
 //			act = "eat";
-//		}else if(grille_shop[cx-1][cy] === "d"){
+//		}else if(grille_shop[cx-1][cy] === "d" || grille_shop[cx][cy+1] === "d"){
 //			act = "drink";
 //		}
 //	}
