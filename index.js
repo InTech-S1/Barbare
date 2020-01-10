@@ -71,6 +71,8 @@ const req_jeu_histoire = require("./req_jeu_histoire.js");
 const req_accueil_sauvegarde = require("./req_accueil_sauvegarde.js");
 const req_sauvegarde = require("./req_sauvegarde.js");
 const req_load = require("./req_load.js");
+const req_tuto = require("./req_tuto.js");
+
 const req_jeu_survie = require("./req_jeu_survie.js");
 const req_boutique = require("./req_boutique.js");
 const req_shop = require("./req_shop.js");
@@ -121,6 +123,9 @@ const traite_requete = function (req, res) {
 				break;
 			case '/req_debuter':
 				req_debuter(req, res, query, niveau, heros);
+				break;
+			case '/req_tuto':
+				req_tuto(req, res, query);
 				break;
 			case '/req_jeu_histoire':
 				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau);
