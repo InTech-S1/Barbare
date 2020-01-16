@@ -6,12 +6,13 @@ const fs = require("fs");
 require('remedial');
 
 const map = require("./map.js");
+const life_perso = require('./attaque_ennemi.js');
 
-const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niveau){
+const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niveau, nom){
 	
 	let marqueurs;
 	let page;
-	let tmp = {"x" : 3, "y" : 2, "life" : 200, "scry" : 1, "epee" : 1, "hache" : 0, "dague" : 0, "huile" : 0, "pieces" : 0};
+	let tmp = {"x" : 3, "y" : 2, "life" : 100, "scry" : 1, "epee" : 1, "hache" : 0, "dague" : 0, "masse" : 0, "potion" : 2, "epee_1": 0, "epee_2": 0, "arc" : 0, "pieces" : 100};
 	if(niveau[0] === 1){
 		heros.splice(0, 1);
 		heros.push(tmp);
@@ -42,11 +43,35 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 	}
 		
 	console.log(bfld);
+	console.log(niveau);
+    console.log(nom + "nom");
+    console.log(tmp.life);
+
 	
 	let n = niveau[0];
 	page = fs.readFileSync("map" + n +".html", "utf-8");
 	marqueurs = {};
-	marqueurs.land = map(bfld);
+
+	if(typeof oppo[0] !== "undefined"){
+		marqueurs.life_enemy1 = oppo[0].life + "%";
+	} else {
+		marqueurs.life_enemy1 = "";
+	}
+
+	marqueurs.masse = heros[0].masse;
+	marqueurs.money = heros[0].pieces + "$";
+	marqueurs.dague = heros[0].dague;
+	marqueurs.epee = heros[0].epee;
+	marqueurs.hache = heros[0].hache;
+	marqueurs.belle_epee = heros[0].epee_1;
+	marqueurs.epee_casse = heros[0].epee_2;
+	marqueurs.arc = heros[0].arc;
+	marqueurs.potion = "x" + heros[0].potion;
+	marqueurs.land = map(bfld, query, oppo, heros);
+	marqueurs.life = heros[0].life + "%";
+    marqueurs.nom = nom[0];
+    marqueurs.level = niveau[0];
+
 
 	res.writeHead(200, {'Content-Type' : 'text/html'});
     res.write(page.supplant(marqueurs));

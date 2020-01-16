@@ -1,7 +1,6 @@
 "use strict";
 
-// TODO: Supprimer les paramètres inutiles de la fonction.
-const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau){
+const attaque_ennemi = function(oppo, heros){
 
 	let degats;
 	let perso = heros[0];
@@ -9,12 +8,14 @@ const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau
 	let target;
 	let checktarget = 0;
 	let succes;
-
+	let life;
+	
 	for(let i = 0; i < oppo.length; i++){
 		tmp = oppo[i];
 		if(tmp.scry === 1){	
 			if (tmp.x === perso.x && tmp.y === perso.y -1){
 				checktarget = checktarget + 1;
+				oppo[i].attaque_r = "oui";
 			}else if(tmp.x === perso.x && tmp.y === perso.y + 1){
 				tmp.scry = 0;
 			}
@@ -35,6 +36,7 @@ const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau
         if(tmp.scry === 0){ 
             if (tmp.x === perso.x && tmp.y === perso.y +1){
                 checktarget = checktarget + 1;
+				oppo[j].attaque_l = "oui";
             }else if(tmp.x === perso.x && tmp.y === perso.y -1){
 				tmp.scry = 1;
 			}
@@ -49,6 +51,8 @@ const attaque_ennemi = function(req, res, query, bfld, wave, oppo, heros, niveau
             checktarget = 0;
         }
     }
+    life = perso.life;
+    return life;
 
 
 };

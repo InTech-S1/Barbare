@@ -13,18 +13,13 @@ const req_shop = function(req, res, query, grille_shop){
     let page;
     let i;
     let j;
-
-	for (i = 0; i < grille_shop.length; i++){
-		for(j = 0; j < grille_shop[i].length; j++){
+	
+    for(i = 0; i < grille_shop.length; i ++){
+        for(j = 0; j< grille_shop[i].length; j++){
 			if(grille_shop[i][j] === "x"){
 				grille_shop[i][j] = " ";
 			}
-		}
-	}
-
-/*    for(i = 0; i < grille_shop.length; i ++){
-        for(j = 0; j< grille_shop[i].length; j++){
-            if(grille_shop[i][j] === "1"){
+           /* if(grille_shop[i][j] === "1"){
                 grille_shop[i][j] = "";
 
             } else if(grille_shop[i][j] === "m"){
@@ -35,10 +30,10 @@ const req_shop = function(req, res, query, grille_shop){
 				grille_shop[i][j] === "s";
 			} else {
                 grille_shop[i][j] = " ";
-            }
+            }*/
         }
     }
-*/  grille_shop[11][9] = "x";
+    grille_shop[11][9] = "x";
 	console.log(grille_shop);
 
     page = fs.readFileSync('inn.html', 'utf-8');

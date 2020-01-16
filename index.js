@@ -17,35 +17,26 @@ let e7 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"];
 bfld.push(e1, e2, e3, e4, e5, e6, e7);
 
 let grille_magasin = [];
-let a1 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"];
-let a2 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", "e"];
-let a3 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " "];
-let a4 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1"];
-let a5 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1"];
-let a6 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1"];
-let a7 = ["1","1","1","1","1","1","1","1","1","m","1", "1", "1", "1", " ", "1", "1", "1", "1", " ", " ", " ", " ", "1", "1", "1"];
-let a8 = ["1","1","1","1","1","1","1","1"," "," "," ", "1", "1", " ", " ", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " "];
-let a9 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", "1", " ", " ", "1", "1", "1", "1", " ", " ", " ", "1", "1", " ", " "];
-let a10 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", " ", " ", " ", "1", "1", "1", "1", " ", " ", " ", "1", "1", " ", " "];
-let a11 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", " ", " ", " ", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " "];
-let a12 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", " ", " ", " ", "1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " "];
-let a13 = ["1","1","1","1","1","1","1","1"," "," "," ", " ", " ", " ", " ", "1", "1", "1", "1", " ", " ", "1", "1", " ", " ", " "];
-let a14 = ["1","1","1","1","1","1","1","1"," "," ","1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", "1", "1", " ", " ", " "];
-let a15 = ["1","1","1","1","1","1","1","1"," "," ","1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", "1", "1", " ", " ", " "];
-let a16 = ["1","1","1","1","1","1","1"," "," "," ","1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " ", "1", "1", " "];
-let a17 = ["1","1","1","1","1","1","1"," "," "," "," ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", " "];
-let a18 = ["1","1","1","1","1","1","1"," "," "," "," ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1", " "];
-let a19 = ["1","1","1"," "," "," "," "," "," "," "," ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1", " "];
-let a20 = ["1","1"," "," "," "," "," "," "," ","1","1", "1", "1", " ", " ", " ", " ", "1", "1", " ", " ", " ", "1", "1", "1", " "];
-grille_magasin.push(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16, a17, a18, a19, a20);
+let a1 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " ", " "];
+let a2 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " ", " ", " "];
+let a3 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1", "1"];
+let a4 = ["1","1","1","1","1","1","1","1","1","1","m", "m", "1", "1", " ", "1", "1", " ", " ", " ", " ", " ", " ", " ", "1"];
+let a5 = ["1","1","1","1","1","1","1","1","1","1"," ", " ", "1", "1", " ", "1", "1", "1", " ", " ", "1", "1", " ", " ", " "];
+let a6 = ["1","1","1","1","1","1","1","1","1","1"," ", " ", " ", " ", " ", "1", "1", "1", " ", " ", "1", "1", " ", " ", "1"];
+let a7 = ["1","1","1","1","1","1","1","1","1","1"," ", " ", " ", " ", " ", "1", "1", "1", " ", " ", " ", " ", " ", " ", "1"];
+let a8 = ["1","1","1","1","1","1","1","1","1","1"," ", " ", "1", "1", "1", "1", "1", "1", " ", "1", "1", "1", " ", " ", "1"];
+let a9 = ["1","1","1","1","1","1","1","1","1"," "," ", " ", " ", " ", " ", " ", "1", "1", " ", " ", " ", "1", " ", " ", "1"];
+let a10 = ["1","1","1","1","1","1","1","1","1"," "," ", " ", " ", " ", " ", " ", " ", " "," ", " ", " ", "1", "1", " ", " "];
+let a11 = ["1","1","1","1","1","1"," "," "," "," "," ", "1", "1", " ", " ", " ", " ", "1"," ", " ", " ", "1", "1", " ", " "];
+grille_magasin.push(a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11);
 
 let grille_shop = [];
 let b1 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"];
 let b2 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"];
-let b3 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","e","e","1","1","1","1","1","1"];
-let b4 = ["1","1","1","1","1","1","1","1","1","1","1","1","1"," "," "," ","1","1"," ","d","1"];
-let b5 = ["1","1","1","1","l","l","l","1"," "," "," "," "," "," "," "," ","1","1"," ","d","d"];
-let b6 = ["1","1","1"," "," "," "," ","1"," ","1"," ","1","1"," ","1"," "," "," "," "," ","1"];
+let b3 = ["1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1","1"];
+let b4 = ["1","1","1","1","l","1","1","1","1","1","1","1","1","e","e"," ","1","1"," ","1","1"];
+let b5 = ["1","1","1","l","l","l","1","1"," "," "," "," "," "," "," "," ","1","1"," ","d","1"];
+let b6 = ["1","1","1"," "," "," "," ","1"," ","1"," ","1","1"," ","1"," "," "," "," ","d","1"];
 let b7 = ["1","1","1"," "," "," "," ","1"," ","1","1","1","1"," ","1","1","1","1","1","1","1"];
 let b8 = ["1","1","1"," ","1"," ","1","1","1","1","1","1","1"," ","1","1","1","1","1","1","1"];
 let b9 = ["1","1","1","1","1"," ","1","1","1","s","s"," "," "," ","1"," "," "," "," "," ","1"];
@@ -58,8 +49,11 @@ let wave = [0];
 let niveau = [1];
 let heros = [];
 let oppo = [];
+let nom = [];
+let life_enemy;
 let save = [1,200,1,0,0,0,0];
 let save2 = [1,200,1,0,0,0,0];
+
 
 const req_accueil = require("./req_accueil.js");
 const req_commencer = require("./req_commencer.js");
@@ -68,21 +62,20 @@ const req_inscrire = require("./req_inscrire.js");
 const req_identifier = require("./req_identifier.js");
 const req_debuter = require("./req_debuter.js");
 const req_jeu_histoire = require("./req_jeu_histoire.js");
-const req_accueil_sauvegarde = require("./req_accueil_sauvegarde.js");
-const req_sauvegarde = require("./req_sauvegarde.js");
-const req_load = require("./req_load.js");
-const req_tuto = require("./req_tuto.js");
-
 const req_jeu_survie = require("./req_jeu_survie.js");
 const req_boutique = require("./req_boutique.js");
 const req_shop = require("./req_shop.js");
+const req_acheter = require("./req_acheter.js");
+const req_sauvegarde = require("./req_sauvegarde.js");
+const req_load = require("./req_load.js");
+const req_tuto = require("./req_tuto.js");
+const req_accueil_sauvegarde = require("./req_accueil_sauvegarde.js");
+
 
 const move = require("./move.js");
 const move_shop = require("./move_shop.js");
 const move_inn = require("./move_inn.js");
 const move_survie = require("./move_survie.js");
-
-//const req_actualiser = require("./req_actualiser.js");
 
 const req_static = require("./req_statique.js");
 const req_erreur = require("./req_erreur.js");
@@ -119,7 +112,7 @@ const traite_requete = function (req, res) {
 				req_inscrire(req, res, query);
 				break;
 			case '/req_identifier':
-				req_identifier(req, res, query, uuidV4, save, save2);
+				req_identifier(req, res, query, uuidV4, save, save2, nom);
 				break;
 			case '/req_debuter':
 				req_debuter(req, res, query, niveau, heros);
@@ -128,20 +121,20 @@ const traite_requete = function (req, res) {
 				req_tuto(req, res, query);
 				break;
 			case '/req_jeu_histoire':
-				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau);
+				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau, nom);
 				break;
 			case '/move':
-				move(req, res, query, bfld, wave, oppo, heros, niveau);
+				move(req, res, query, bfld, wave, oppo, heros, niveau, life_enemy);
 				break;
 			case '/req_accueil_sauvegarde':
 				req_accueil_sauvegarde(req, res, query, heros, niveau);
 				break;
-			case '/req_sauvegarde':
-				req_sauvegarde(req, res, query, heros, niveau);
-				break;
-			case '/req_load':
-				req_load(req, res, query, bfld, heros, oppo, wave, niveau, save, save2);
-				break;
+            case '/req_sauvegarde':
+                req_sauvegarde(req, res, query, heros, niveau);
+                break;
+            case '/req_load':
+                req_load(req, res, query, bfld, heros, oppo, wave, niveau, save, save2);
+                break;
 			case '/req_jeu_survie':
 				req_jeu_survie(req, res, query, bfld, heros, oppo, wave);
 				break;
@@ -157,12 +150,12 @@ const traite_requete = function (req, res) {
 			case '/req_shop':
 				req_shop(req, res, query, grille_shop, grille_magasin);
 				break;
+			case '/req_acheter':
+				req_acheter(req, res, query, heros);
+				break;
 			case '/move_inn':
 				move_inn(res, req, query, grille_shop, grille_magasin);
 				break;
-			//case '/req_actualiser':
-			//	req_actualiser(req, res, query, maj, maj_ennemi);
-			//	break;
 			default:
 				req_static(req, res, query);
 				break;

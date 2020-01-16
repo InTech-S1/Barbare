@@ -2,49 +2,34 @@
 	<head>
 		<meta charset="UTF-8"> 
 		<title>Foret</title>
-		<style type="text/css">
-		.body{
-			background-color: black;
-			background-size: cover;
-			background-repeat: no-repeat;
-		}
-		 #input{
-            cursor: pointer;
-        }
-        .bfld {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1360px;
-            height: 556px;
-            background-image: url("/maps/2-foret.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-        .land{
-            float: left;
-            width: 87px;
-            height: 87px;
-            display: table-cell;
-            vertical-align: middle;
-            font-size: 30px;
-            text-align: center;
-        }
-		.perso{
-            height: 70px;
-            width: 70px;
-        }
-        .ghost{
-            height: 60px;
-            width: 50px;
-        }
-
-		</style>
+		<link rel="stylesheet" href="visuel_map2.css" type="text/css">
 	</head>
 
 	<body class="body">
-		<div class='bfld' id = 'bfld'>
-			{land}
+		<div class="container" >
+            <div id="player-container" class="text-border scale">
+                <div id="player-forms">
+                    <div class="name-panel">
+                        <div id="player-name-panel">{nom}</div>
+                        <div id="player-level-panel">{level}/10</div>
+                    </div>
+                    <div class="player-life-panel">
+                        <div class="life" id = "life"
+                             style="width: {life}">
+                        <div id = "container">{life}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-border scale" id="enemy-container">
+                <div id="enemy-forms">
+                    <div id="enemy-life-panel">{m1}</div>
+                </div>
+            </div>
+
+			<div class='bfld' id = 'bfld'>
+				{land}
+			</div>
 		</div>
 
 <!--		<form action="/req_debuter" method="GET">
@@ -55,18 +40,28 @@
         <script>
             window.addEventListener("keydown", function (event) {
 				let newUrl = null;
+				let sprite = document.querySelector(".perso");
 				console.log(event.keyCode);
 
-				if (event.keyCode === 90) {
-					newUrl = "http://localhost:5000/move?action=Haut&&key=" + event.keyCode;
-				} else if(event.keyCode === 83){
-					newUrl = "http://localhost:5000/move?action=Bas&&key=" + event.keyCode;
-				} else if(event.keyCode === 68){
-					newUrl = "http://localhost:5000/move?action=Droite&&key=68";
-				} else if(event.keyCode === 81){
-					newUrl = "http://localhost:5000/move?action=Gauche&&key=81";
+				if (event.keyCode === 38) {
+					sprite.classList.add('perso_up');
+
+					newUrl = "http://localhost:5000/move?action=Haut";
+				} else if(event.keyCode === 40){
+					sprite.classList.add('perso_down');
+
+					newUrl = "http://localhost:5000/move?action=Bas";
+				} else if(event.keyCode === 39){
+					sprite.classList.add('perso_right');
+
+					newUrl = "http://localhost:5000/move?action=Droite";
+				} else if(event.keyCode === 37){
+					sprite.classList.add('perso_left');
+
+					newUrl = "http://localhost:5000/move?action=Gauche";
 				} else if(event.keyCode === 32){
-					newUrl = "http://localhost:5000/move?action=Attaquer&&key=32";
+
+					newUrl = "http://localhost:5000/move?action=Attaquer";
 				}
 
 				if(newUrl !== null){
@@ -76,12 +71,25 @@
 						.then(function (reponse) {
 							// Récupération de l'élément DOM
 							if(reponse.type === 'refresh'){
-								const element = document.getElementById("bfld");
+								function timed (){
+                                setTimeout(myTime, 1205);
+                            	}
+                            	timed();
+                            	function myTime(){
+                                	document.getElementById("bfld").innerHTML=reponse.value;
+                            	}
+                                const perso = document.getElementById("container");
+                                const life = document.getElementById("life");
+                                var bar_life = reponse.life;
+
 
 								// Assignation du nouveau HTML
-								element.innerHTML = reponse.value;
+								perso.innerHTML = reponse.life;
+                                life.style.width = bar_life + "%";
+
 							} else if(reponse.type === 'update') {
 								document.querySelector('html').innerHTML = reponse.value;
+								//window.location = reponse.value;
 							}
 					
 						});

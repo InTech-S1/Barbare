@@ -3,7 +3,7 @@
 const fs = require("fs");
 require('remedial');
 
-const trait = function (req, res, query, uuidV4, save, save2) {
+const trait = function (req, res, query, uuidV4, save, save2, nom) {
 
 	let marqueurs;
 	let pseudo;
@@ -60,6 +60,7 @@ const trait = function (req, res, query, uuidV4, save, save2) {
         marqueurs.sid = uuidV4();
 		marqueurs.pseudo = query.pseudo;
         page = page.supplant(marqueurs);
+		nom.push(query.pseudo);
 
 	} else {
 

@@ -18,14 +18,6 @@ const req_boutique = function(req, res, query, grille_magasin){
 			if(grille_magasin[i][j] === "x"){
 				grille_magasin[i][j] = " ";
 			}
-//            if(grille_magasin[i][j] === "1"){
-//                grille_magasin[i][j] = "";
-//           
-//			} else if(grille_magasin[i][j] === "m"){
-//				grille_magasin[i][j] = "m";
-//			} else {
-//				grille_magasin[i][j] = " ";
-//			}
     	}
     }
 	grille_magasin[1][24] = "x";

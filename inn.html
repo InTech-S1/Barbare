@@ -3,45 +3,7 @@
     <head>
         <meta charset="UTF-8"> 
         <title>Interieur magasin</title>
-        <style type="text/css">
-			.body{
-				background-color: black;
-				background-size: cover;
-				background-repeat: no-repeat;
-			}
-			 #input{
-				cursor: pointer;
-			}
-			.grille {
-				position: absolute;
-				top: 50%; left: 50%;
-				transform: translate(-50%, -50%);
-				width: 1360px;
-				height: 556px;
-				margin: 0px;
-				border: 0px solid black;
-				background-image: url("/maps/45-inn.png");
-				background-size: cover;
-				background-repeat: no-repeat;
-			}
-			.grille-ligne {
-				display: flex;
-				flex-direction: row;
-			}
-			.case{
-				float: left;
-				width: 60px;
-				height: 44px;
-				display: table-cell;
-				vertical-align: middle;
-				font-size: 30px;
-				text-align: center;
-			}
-			.perso{
-				height: 60px;
-				width: 70px;
-			}
-		</style>
+		<link rel="stylesheet" href="visuel_magasin.css" type="text/css">
     </head>
 
     <body class="body">
@@ -53,17 +15,17 @@
             window.addEventListener("keydown", function (event) {
                 let newUrl = null;
                 console.log(event.keyCode);
-                if (event.keyCode === 90) {
+                if (event.keyCode === 90 || event.keyCode === 38) {
 					console.log('oui');
-                    newUrl = "http://localhost:5000/move_inn?action=Haut&&key=" + event.keyCode;
-                } else if(event.keyCode === 83){
-                    newUrl = "http://localhost:5000/move_inn?action=Bas&&key=" + event.keyCode;
-                } else if(event.keyCode === 68){
-                    newUrl = "http://localhost:5000/move_inn?action=Droite&&key=68";
-                } else if(event.keyCode === 81){
-                    newUrl = "http://localhost:5000/move_inn?action=Gauche&&key=81";
+                    newUrl = "http://localhost:5000/move_inn?action=Haut";
+                } else if(event.keyCode === 83 || event.keyCode === 40){
+                    newUrl = "http://localhost:5000/move_inn?action=Bas";
+                } else if(event.keyCode === 68 || event.keyCode === 39 ){
+                    newUrl = "http://localhost:5000/move_inn?action=Droite";
+                } else if(event.keyCode === 81 || event.keyCode === 37 ){
+                    newUrl = "http://localhost:5000/move_inn?action=Gauche";
 				} else if(event.keyCode === 32){
-					newUrl = "http://localhost:5000/move_inn?action=Interaction&&key=32";
+					newUrl = "http://localhost:5000/move_inn?action=Interaction";
 				}
                 if(newUrl !== null){
                     event.preventDefault();

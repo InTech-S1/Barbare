@@ -1,5 +1,5 @@
 body {
-	background-image: url('e.gif');
+	background-image: url('/img/e.gif');
 	background-size: cover;
 	background-repeat: no-repeat;
 	font-family: "Algerian";
@@ -85,8 +85,8 @@ body {
 	padding-right: 2px;
 	z-index: -1;
 	
-	-moz-border-radius-topleft: 5px;
-	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-top-left: 5px;
+	-moz-border-radius-bottom-left: 5px;
 }
 
 #user-icon {

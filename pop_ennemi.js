@@ -22,8 +22,6 @@ const pop_ennemi = function(bfld){
 			}
 		}
 	}
-	console.log(espace);
-
 	for (i = 0; i < 3; i++) {
 		random = Math.floor(Math.random()*espace.length);
 		coor = espace[random];
@@ -33,7 +31,7 @@ const pop_ennemi = function(bfld){
 		y = coor[1];
 		console.log(x, y);
 		bfld[x][y] = "o";
-		nvEnnemi = { "x": x, "y": y, "life": 60, "scry": 0 };
+		nvEnnemi = { "x": x, "y": y, "life": 100, "scry": 0, "attaque_r": "non", "attaque_l":"non" };
 		oppo.push(nvEnnemi);
 	}
 
