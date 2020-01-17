@@ -3,7 +3,7 @@
 const fs = require("fs");
 require('remedial');
 
-const trait = function (req, res, query, uuidV4, save, save2, nom) {
+const trait = function (req, res, query, uuidV4, nom) {
 
 	let marqueurs;
 	let pseudo;
@@ -29,23 +29,6 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
 		if (listeMembres[i].pseudo === query.pseudo) {
 			if (listeMembres[i].password === query.password) {
 				trouve = true;
-				save[0] = Number(listeMembres[i].sauvegarde1);
-				save[1] = Number(listeMembres[i].pv1);
-				save[2] = Number(listeMembres[i].epee1);
-				save[3] = Number(listeMembres[i].hache1);
-				save[4] = Number(listeMembres[i].dague1);
-				save[5] = Number(listeMembres[i].huile1);
-				save[6] = Number(listeMembres[i].pieces1);
-
-
-				save2[0] = Number(listeMembres[i].sauvegarde2);
-				save2[1] = Number(listeMembres[i].pv2);
-                save2[2] = Number(listeMembres[i].epee2);
-                save2[3] = Number(listeMembres[i].hache2);
-                save2[4] = Number(listeMembres[i].dague2);
-                save2[5] = Number(listeMembres[i].huile2);
-                save2[6] = Number(listeMembres[i].pieces2);
-
 			}
 		}
 		i++;
@@ -54,13 +37,12 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
 	// ON RENVOIT UNE PAGE HTML 
 
 	if (trouve === true) {
-		
+		nom.push(query.pseudo);
 		page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
 		marqueurs = {};
         marqueurs.sid = uuidV4();
 		marqueurs.pseudo = query.pseudo;
         page = page.supplant(marqueurs);
-		nom.push(query.pseudo);
 
 	} else {
 
@@ -78,6 +60,5 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
 	res.end();
 };
 
-//---------------------------------------------------------------------------
 
 module.exports = trait;
