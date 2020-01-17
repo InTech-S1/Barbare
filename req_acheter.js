@@ -13,7 +13,7 @@ const req_acheter = function (req, res, query, heros){
 
 
 	marqueurs = {};
-	page = fs.readFileSync("catalogue.html", "utf-8");
+	page = fs.readFileSync("./html/catalogue.html", "utf-8");
 
 	if(typeof buy !== 'undefined'){
 		if(buy === '2'){

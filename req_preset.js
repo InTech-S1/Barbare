@@ -4,15 +4,15 @@ const fs = require("fs");
 require('remedial');
 
 
-const req_tuto = function (req, res, query){
+const req_preset = function (req, res, query, niveau){
 
     let page;
     let marqueurs;
 	let n;
 
-	n = query.action;
-
-    page = fs.readFileSync('./html/tuto' + n + '.html', 'utf-8');
+	n = niveau[0];
+	console.log(niveau[0]);
+    page = fs.readFileSync('./html/preset' + n + '.html', 'utf-8');
 
     marqueurs = {};
     marqueurs.erreur = "";
@@ -24,5 +24,5 @@ const req_tuto = function (req, res, query){
 
 };
 
-module.exports = req_tuto;
+module.exports = req_preset;
 

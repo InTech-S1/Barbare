@@ -3,17 +3,15 @@
 const fs = require("fs");
 require('remedial');
 
-const req_accueil = function (req, res, query) {
+const credits = function (req, res, query) {
 
 	let marqueurs;
 	let page;
 
-
-	page = fs.readFileSync('./html/accueil.html', 'utf-8');
+	page = fs.readFileSync('./html/credits.html', 'utf-8');
 
 	marqueurs = {};
 	marqueurs.erreur = "";
-	marqueurs.pseudo = "";
 	page = page.supplant(marqueurs);
 
 	res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -21,4 +19,4 @@ const req_accueil = function (req, res, query) {
 	res.end();
 };
 
-module.exports = req_accueil;
+module.exports = credits;

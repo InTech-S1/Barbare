@@ -34,8 +34,12 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
 				save[2] = Number(listeMembres[i].epee1);
 				save[3] = Number(listeMembres[i].hache1);
 				save[4] = Number(listeMembres[i].dague1);
-				save[5] = Number(listeMembres[i].huile1);
-				save[6] = Number(listeMembres[i].pieces1);
+				save[5] = Number(listeMembres[i].masse1);
+				save[6] = Number(listeMembres[i].potion1);
+				save[7] = Number(listeMembres[i].epee_1_1);
+				save[8] = Number(listeMembres[i].epee_2_1);
+				save[9] = Number(listeMembres[i].arc1);
+				save[10] = Number(listeMembres[i].pieces1);
 
 
 				save2[0] = Number(listeMembres[i].sauvegarde2);
@@ -43,8 +47,12 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
                 save2[2] = Number(listeMembres[i].epee2);
                 save2[3] = Number(listeMembres[i].hache2);
                 save2[4] = Number(listeMembres[i].dague2);
-                save2[5] = Number(listeMembres[i].huile2);
-                save2[6] = Number(listeMembres[i].pieces2);
+				save2[5] = Number(listeMembres[i].masse2);
+                save2[6] = Number(listeMembres[i].potion2);
+                save2[7] = Number(listeMembres[i].epee_1_2);
+                save2[8] = Number(listeMembres[i].epee_2_2);
+                save2[9] = Number(listeMembres[i].arc2);
+                save2[10] = Number(listeMembres[i].pieces2);
 
 			}
 		}
@@ -55,7 +63,7 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
 
 	if (trouve === true) {
 		
-		page = fs.readFileSync('modele_accueil_membre.html', 'UTF-8');
+		page = fs.readFileSync('./html/modele_accueil_membre.html', 'UTF-8');
 		marqueurs = {};
         marqueurs.sid = uuidV4();
 		marqueurs.pseudo = query.pseudo;
@@ -64,7 +72,7 @@ const trait = function (req, res, query, uuidV4, save, save2, nom) {
 
 	} else {
 
-		page = fs.readFileSync('modele_accueil.html', 'utf-8');
+		page = fs.readFileSync('./html/modele_accueil.html', 'utf-8');
 
         marqueurs = {};
         marqueurs.erreur = "ERREUR : compte ou mot de passe incorrect";

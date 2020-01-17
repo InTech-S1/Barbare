@@ -44,12 +44,11 @@ const req_jeu_histoire = function (req, res, query, bfld, heros, oppo, wave, niv
 		
 	console.log(bfld);
 	console.log(niveau);
-    console.log(nom + "nom");
     console.log(tmp.life);
 
 	
 	let n = niveau[0];
-	page = fs.readFileSync("map" + n +".html", "utf-8");
+	page = fs.readFileSync("./html/map" + n +".html", "utf-8");
 	marqueurs = {};
 
 	if(typeof oppo[0] !== "undefined"){

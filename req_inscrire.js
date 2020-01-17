@@ -1,8 +1,3 @@
-//=========================================================================
-// Traitement de "req_inscrire"
-// Auteurs : P. Thiré & T. Kerbrat
-// Version : 12/09/2018
-//=========================================================================
 "use strict";
 
 const fs = require("fs");
@@ -20,12 +15,8 @@ const trait = function (req, res, query) {
 	let i;
 	let trouve;
 
-	// ON LIT LES COMPTES EXISTANTS
-
 	contenu_fichier = fs.readFileSync("membres.json", 'utf-8');
 	listeMembres = JSON.parse(contenu_fichier);
-
-	// ON VERIFIE QUE LE COMPTE N'EXISTE PAS DEJA
 
 	trouve = false;
 	i = 0;
@@ -55,7 +46,7 @@ const trait = function (req, res, query) {
 	if (trouve === true) {
 		// SI CREATION PAS OK, ON REAFFICHE PAGE FORMULAIRE AVEC ERREUR
 
-		page = fs.readFileSync('modele_formulaire_inscription.html', 'utf-8');
+		page = fs.readFileSync('./html/modele_formulaire_inscription.html', 'utf-8');
 
 		marqueurs = {};
 		marqueurs.erreur = "ERREUR : ce compte existe déjà";
@@ -65,7 +56,7 @@ const trait = function (req, res, query) {
 	} else {
 		// SI CREATION OK, ON ENVOIE PAGE DE CONFIRMATION
 
-		page = fs.readFileSync('modele_confirmation_inscription.html', 'UTF-8');
+		page = fs.readFileSync('./html/modele_confirmation_inscription.html', 'UTF-8');
 
 		marqueurs = {};
 		marqueurs.pseudo = query.pseudo;
@@ -78,6 +69,5 @@ const trait = function (req, res, query) {
 	res.end();
 };
 
-//---------------------------------------------------------------------------
 
 module.exports = trait;

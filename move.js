@@ -109,7 +109,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_ene
 				}
 			}
 			if (checktarget === 1){
-				damage = Math.floor(Math.random()*10) + 20;
+				damage = Math.floor(Math.random()*10) + 100;
 				target.life = target.life - damage;;
 			}
 		}else if (perso.scry === 0){
@@ -121,11 +121,10 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_ene
                 }
             }
 			if (checktarget === 1){
-            	damage = Math.floor(Math.random()*10) + 20;
+            	damage = Math.floor(Math.random()*10) + 100;
 				target.life = target.life - damage;
 			}
 		}
-		life_enemy = target.life;
 	}
 //	else if (play === "Soin"){
 
@@ -154,7 +153,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_ene
 
 	if(perso.life <= 0){
 		// Quand le joueur n'a plus de vie.
-		page = fs.readFileSync('fin_histoire.html', 'utf-8');
+		page = fs.readFileSync('./html/fin_histoire.html', 'utf-8');
 
 		marqueurs.erreur = "";
 		marqueurs.level = niveau[0];
@@ -163,7 +162,7 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_ene
 		reponse.value = page.supplant(marqueurs);
 	}else if(oppo.length === 0 && wave[0]!== 0){
 		wave[0] = wave[0] + 1;
-		if (wave[0] < 3){
+		if (wave[0] < 2){
 			// Vague suivante (dans le même niveau).
 			ennemi = pop_ennemi(bfld);
 			oppo.push(...ennemi);
@@ -180,17 +179,19 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_ene
 			//}
 			console.log(oppo[0].life);
 			//reponse.life = attaque_ennemi(oppo, hero);
-		}else if (wave[0] === 3){
+		}else if (wave[0] === 2){
 			// Niveau suivant.
 			money = Math.floor(Math.random()*10 + niveau[0]);
 			heros[0].pieces = heros[0].pieces + money;
     		niveau[0] = niveau[0] + 1;
 			
-			page = fs.readFileSync(
-				(niveau[0] % 2 === 0 ? 'palier.html' : 'palier2.html'),
-				'utf-8'
-			);
-
+			if(niveau[0]%2 === 0){
+				page = fs.readFileSync('./html/palier.html', 'utf-8');
+			}else if(niveau[0]%2 === 1 && niveau[0]!== 3){
+				page = fs.readFileSync('./html/palier2.html', 'utf-8');
+			}else{
+				page = fs.readFileSync('./html/win.html', 'utf-8');
+			}
 			marqueurs.erreur = "";
 			marqueurs.level = niveau[0];
 			reponse.type = 'update';
@@ -203,9 +204,9 @@ const move = function(req, res, query, bfld, wave, oppo, heros, niveau, life_ene
 		reponse.type = 'refresh';
 		reponse.value = map(bfld, query, oppo, heros);
 		reponse.life = heros[0].life;
-		//if(enemy !== "undefined"){
+		if(oppo.length !== 0){
 			reponse.life_enemy = oppo[0].life;
-		//}
+		}
 		reponse.potion = heros[0].potion;
 		console.log(reponse.life);
 	}
