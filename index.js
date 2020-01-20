@@ -18,7 +18,7 @@ bfld.push(e1, e2, e3, e4, e5, e6, e7);
 
 let grille_magasin = [];
 let a1 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " ", " "];
-let a2 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " ", " ", "e"];
+let a2 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", "1", "1", "1", "1", "1", " ", " ", " ", " ", " ", " "];
 let a3 = ["1","1","1","1","1","1","1","1","1","1","1", "1", "1", "1", " ", " ", " ", " ", " ", " ", " ", "1", "1", "1", "1"];
 let a4 = ["1","1","1","1","1","1","1","1","1","1","m", "m", "1", "1", " ", "1", "1", " ", " ", " ", " ", " ", " ", " ", "1"];
 let a5 = ["1","1","1","1","1","1","1","1","1","1"," ", " ", "1", "1", " ", "1", "1", "1", " ", " ", "1", "1", " ", " ", " "];
@@ -51,8 +51,8 @@ let heros = [];
 let oppo = [];
 let nom = [];
 let life_enemy;
-let save = [1,200,1,0,0,0,0,0,0,0,0,0];
-let save2 = [2,200,1,0,0,0,0,0,0,0,0,0];
+let save = [1,200,1,0,0,0,0];
+let save2 = [1,200,1,0,0,0,0];
 
 
 const req_accueil = require("./req_accueil.js");
@@ -69,9 +69,6 @@ const req_acheter = require("./req_acheter.js");
 const req_sauvegarde = require("./req_sauvegarde.js");
 const req_load = require("./req_load.js");
 const req_tuto = require("./req_tuto.js");
-const req_story = require("./req_story.js");
-const req_preset = require("./req_preset.js");
-const req_credits = require("./req_credits.js");
 const req_accueil_sauvegarde = require("./req_accueil_sauvegarde.js");
 
 
@@ -123,15 +120,6 @@ const traite_requete = function (req, res) {
 			case '/req_tuto':
 				req_tuto(req, res, query);
 				break;
-			case '/req_story':
-				req_story(req, res, query);
-				break;
-			case '/req_preset':
-				req_preset(req, res, query, niveau);
-				break;
-			case '/req_credits':
-				req_credits(req, res, query);
-				break;
 			case '/req_jeu_histoire':
 				req_jeu_histoire(req, res, query, bfld, heros, oppo, wave, niveau, nom);
 				break;
@@ -145,13 +133,13 @@ const traite_requete = function (req, res) {
                 req_sauvegarde(req, res, query, heros, niveau);
                 break;
             case '/req_load':
-                req_load(req, res, query, bfld, heros, oppo, wave, niveau, save, save2, nom);
+                req_load(req, res, query, bfld, heros, oppo, wave, niveau, save, save2);
                 break;
 			case '/req_jeu_survie':
-				req_jeu_survie(req, res, query, bfld, heros, oppo, wave);
+				req_jeu_survie(req, res, query, bfld, heros, oppo, wave, niveau, nom);
 				break;
 			case '/move_survie':
-				move_survie(req, res, query, bfld, wave, oppo, heros, niveau);
+				move_survie(req, res, query, bfld, wave, oppo, heros, niveau, life_enemy);
 				break;
 			case '/req_boutique':
 				req_boutique(req, res, query, grille_magasin);

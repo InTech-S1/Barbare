@@ -12,7 +12,7 @@ const req_tuto = function (req, res, query){
 
 	n = query.action;
 
-    page = fs.readFileSync('./html/tuto' + n + '.html', 'utf-8');
+    page = fs.readFileSync('tuto' + n + '.html', 'utf-8');
 
     marqueurs = {};
     marqueurs.erreur = "";

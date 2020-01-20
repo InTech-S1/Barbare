@@ -12,7 +12,7 @@ const req_debuter = function (req, res, query, niveau, heros) {
 	niveau[0] = 1;
 	heros.splice(0, 1);
 
-	page = fs.readFileSync('./html/modele_debuter.html', 'utf-8');
+	page = fs.readFileSync('modele_debuter.html', 'utf-8');
 
 	sid = query.sid;
 	fs.writeFileSync("ids/" + sid);

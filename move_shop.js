@@ -17,7 +17,6 @@ const move_shop = function(res, req, query, grille_magasin) {
 	let cx;
 	let cy;
 	let enter = false;
-	let exit = false;
 
 	for(i = 0; i < grille_magasin.length; i ++){
         for(j = 0; j< grille_magasin[i].length; j++){
@@ -62,9 +61,7 @@ const move_shop = function(res, req, query, grille_magasin) {
             if (grille_magasin[cx][cy+1] === " "){
                 grille_magasin[cx][cy+1] = "x";
                 grille_magasin[cx][cy] = " ";
-            }else if(grille_magasin[cx][cy+1] === "e"){
-				exit = true;			
-			}
+            } 
 		}
 	}else if (play === "Interaction"){
 		if(grille_magasin[cx-1][cy] === "m"){
@@ -79,11 +76,10 @@ const move_shop = function(res, req, query, grille_magasin) {
     marqueurs = {};
 
 	if(enter === true){
+		
 		reponse.type = 'update';
 		reponse.value = '/req_shop';
-	}else if(exit === true){
-		reponse.type = 'update';
-		reponse.value = '/req_preset';
+		
 	}else{
         // Aller jusqu'au magasin.
         reponse.type = 'refresh';

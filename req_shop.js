@@ -36,7 +36,7 @@ const req_shop = function(req, res, query, grille_shop){
     grille_shop[11][9] = "x";
 	console.log(grille_shop);
 
-    page = fs.readFileSync('./html/inn.html', 'utf-8');
+    page = fs.readFileSync('inn.html', 'utf-8');
 
     marqueurs = {};
     marqueurs.erreur = "";

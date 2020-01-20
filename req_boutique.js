@@ -20,10 +20,10 @@ const req_boutique = function(req, res, query, grille_magasin){
 			}
     	}
     }
-	grille_magasin[1][23] = "x";
+	grille_magasin[1][24] = "x";
 	console.log(grille_magasin);
 
-	page = fs.readFileSync('./html/shop.html', 'utf-8');
+	page = fs.readFileSync('shop.html', 'utf-8');
 	
 	marqueurs = {};
 	marqueurs.erreur = "";
